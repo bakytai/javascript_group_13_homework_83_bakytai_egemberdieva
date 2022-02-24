@@ -8,8 +8,9 @@ const ArtistSchema = new Schema({
         unique: true,
     },
 
-    image: String,
-    information: String
+    information: String,
+
+    image: String
 });
 
 const Artist = mongoose.model('Artist', ArtistSchema);
