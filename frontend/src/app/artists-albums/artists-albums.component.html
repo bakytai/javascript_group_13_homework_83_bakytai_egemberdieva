@@ -3,7 +3,11 @@
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{ album.title }}</mat-card-title>
+      <mat-card-subtitle><b>Artist name: </b>{{ album.artist['name'] }}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-xl-image [src]="album.image | image" [alt]="'Photo of ' + album.title">
+    <mat-card-content>
+      <mat-card-subtitle style="font-size: 15px">Release date:  {{ album.year }}</mat-card-subtitle>
+    </mat-card-content>
   </mat-card>
 </div>
