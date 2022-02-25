@@ -1,2 +1,11 @@
 node_modules
 .idea
+public/uploads/*
+!public/uploads/.gitkeep
+!public/uploads/Adele-30-Cover@2000x1500-1068x801.jpg
+!public/uploads/Adele_-_25_(Official_Album_Cover).png
+!public/uploads/download.jpeg
+!public/uploads/Drake.jpg
+!public/uploads/drake-scorpion.jpg
+!public/uploads/Drake_-_More_Life_cover.jpg
+!public/uploads/R-5221184-1389211873-2035.jpg
