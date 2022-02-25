@@ -48,4 +48,31 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
+router.post('/', upload.single('image'), async (req, res, next) => {
+    try {
+        if (!req.body.title || !req.body.year || req.body.artist) {
+            return res.status(400).send({message: 'Title or year, or arist are required'});
+        }
+
+        const albumData = {
+            artist: req.body.artist,
+            title: req.body.title,
+            year: req.body.year,
+            image: null,
+        };
+
+        if (req.file) {
+            albumData.image = req.file.filename;
+        }
+
+        const album = new Album(albumData);
+
+        await album.save();
+
+        return res.send({message: 'Created new album', id: album._id});
+    } catch (e) {
+        next(e);
+    }
+});
+
 module.exports = router;

@@ -12,8 +12,6 @@ export class AlbumsService {
   constructor(private http: HttpClient) {}
 
   getAlbums(artistId: string) {
-    const url = `${environment.apiUrl}/albums?artist=${artistId}`;
-    console.log(url);
     return this.http.get<ApiAlbumData[]>(environment.apiUrl + '/albums?artist=' + artistId).pipe(
       map(response => {
         return response.map(albumData => {
