@@ -1,1 +1,9 @@
-<p>artists works!</p>
+<div fxLayout="row" style="padding: 20px">
+  <mat-card  *ngFor="let artist of artists | async" [routerLink]="['/artist/',artist.id]"  class="example-card" style="width: 14rem; margin: 5px">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ artist.name }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-xl-image [src]="artist.image | image" [alt]="'Photo of ' + artist.name">
+  </mat-card>
+</div>

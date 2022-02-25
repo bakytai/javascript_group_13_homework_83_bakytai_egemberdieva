@@ -10,7 +10,6 @@ import { map } from 'rxjs/operators';
 
 export class ArtistsService {
 
-
   constructor(private http: HttpClient) {
   }
 
