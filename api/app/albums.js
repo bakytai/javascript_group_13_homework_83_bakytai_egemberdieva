@@ -34,7 +34,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async ( req, res, next) => {
     try {
         const album = await Album.findById(req.params.id);
 
