@@ -7,7 +7,6 @@ const router = express.Router();
 router.post('/', async (req, res, next) => {
     try {
         const user = new User(req.body);
-        user.generateToken();
 
         await user.save();
 
@@ -21,7 +20,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.post('/sessions', async (req, res, next) => {
+router.post('/sessions', async (req, res) => {
     const user = await User.findOne({email: req.body.email});
 
     if (!user) {
@@ -37,7 +36,7 @@ router.post('/sessions', async (req, res, next) => {
     user.generateToken();
     await user.save();
 
-    return  res.send();
+    return  res.send({token: user.token});
 });
 
 module.exports = router;

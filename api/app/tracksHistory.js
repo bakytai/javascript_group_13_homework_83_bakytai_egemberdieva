@@ -18,7 +18,7 @@ router.post('/', auth, async (req, res, next) => {
 
         await trackHistory.save();
 
-        return res.send({message: 'Track history saved'})
+        return res.send(trackHistory)
 
     } catch (e) {
         next(e)
