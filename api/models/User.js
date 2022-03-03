@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const nanoid = require('nanoid');
+const { nanoid } = require('nanoid');
 
 const Schema = mongoose.Schema;
 
@@ -16,7 +16,6 @@ const UserSchema = new Schema({
     },
     token: {
         type: String,
-        required: true
     }
 });
 

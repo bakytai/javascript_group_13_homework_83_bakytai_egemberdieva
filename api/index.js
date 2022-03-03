@@ -3,7 +3,10 @@ const cors = require('cors');
 const mongoose = require("mongoose");
 const config = require('./config');
 const albums = require('./app/albums');
-const artists = require('./app/artists')
+const artists = require('./app/artists');
+const tracks = require('./app/tracks');
+const users = require('./app/users');
+const tracksHistory = require('./app/tracksHistory');
 const app = express();
 
 const port = 8000;
@@ -13,6 +16,9 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use('/artists', artists);
 app.use('/albums', albums);
+app.use('/tracks', tracks);
+app.use('/users', users);
+app.use('/track_history', tracksHistory);
 
 const run = async () => {
     await mongoose.connect(config.mongo.db, config.mongo.options);
