@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const Artist = require("./models/Artist");
 const Album = require("./models/Album");
+const Track = require("./models/Track");
+const User = require("./models/User");
+const TrackHistory = require("./models/TrackHistory");
 
 const run = async () => {
     await mongoose.connect(config.mongo.db, config.mongo.options);
@@ -26,7 +29,7 @@ const run = async () => {
         image: 'Drake.jpg'
     });
 
-    await Album.create({
+     const [twentyFive, score, hits, life, scorpion] = await Album.create({
         artist: adele,
         title: '25',
         year: 'November 20, 2015',
@@ -50,6 +53,56 @@ const run = async () => {
         title: 'Scorpion',
         year: 'June 29, 2018',
         image: 'drake-scorpion.jpg'
+    });
+
+    const [hello, ready, noWomanNoCry, killing, getItTogether, smoke, godsPlan] = await Track.create({
+        album: twentyFive,
+        trackName: 'Hello',
+        duration: '4:57'
+    }, {
+        album: score,
+        trackName: 'Ready or Not',
+        duration: '3:48'
+    }, {
+        album: hits,
+        trackName: 'No Woman No Cry',
+        duration: '4:35'
+    }, {
+        album: hits,
+        trackName: 'Killing me Softly With his Song',
+        duration: '4:13'
+    }, {
+        album: life,
+        trackName: 'Get it together',
+        duration: '4:05'
+    }, {
+        album: life,
+        trackName: 'Free smoke',
+        duration: '3:40'
+    }, {
+        album: scorpion,
+        trackName: 'God s plane',
+        duration: '5:56'
+    });
+
+    const [sara, alina] = await User.create({
+        email: 'saikal@gmail.com',
+        password: 'crazySaikal007',
+        token: '5enDI2paOqusPavVWOnwB'
+    }, {
+        email: 'alina2mail.ru',
+        password: 'crazyAlina',
+        token: '8enDI2paOqusBavVWOnwL'
+    });
+
+    await TrackHistory.create({
+        user: sara,
+        track: ready,
+        dateTime: 'Fri Mar 04 2022 00:27:06 GMT+0600 (East Kazakhstan Time)'
+    }, {
+        user: alina,
+        track: hello,
+        dateTime: 'Fri Mar 04 2022 00:29:59 GMT+0600 (East Kazakhstan Time)'
     });
 
     await mongoose.connection.close();
