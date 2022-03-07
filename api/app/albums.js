@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
             query.artist = req.query.artist;
         }
 
-        const albums = await Album.find(query).populate("artist", "name information image");
+        const albums = await Album.find(query);
 
         return res.send(albums);
     } catch (e) {
@@ -36,7 +36,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async ( req, res, next) => {
     try {
-        const album = await Album.findById(req.params.id);
+        const album = await Album.findById(req.params.id).populate("artist", "name information image");
 
         if (!album) {
             return res.status(404).send({message: 'Not found'});
@@ -50,7 +50,7 @@ router.get('/:id', async ( req, res, next) => {
 
 router.post('/', upload.single('image'), async (req, res, next) => {
     try {
-        if (!req.body.title || !req.body.year || req.body.artist) {
+        if (!req.body.title || !req.body.year || !req.body.artist) {
             return res.status(400).send({message: 'Title or year, or arist are required'});
         }
 
