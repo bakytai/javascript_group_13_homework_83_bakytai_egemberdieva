@@ -26,6 +26,8 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
 import { FileInputComponent } from '../ui/file-input/file-input.component';
+import { userReducer } from './store/user.reducer';
+import { UsersEffects } from './store/user.effects';
 
 @NgModule({
   declarations: [
@@ -44,8 +46,9 @@ import { FileInputComponent } from '../ui/file-input/file-input.component';
         HttpClientModule,
         FormsModule,
         BrowserAnimationsModule,
-        StoreModule.forRoot({artists: artistsReducer, albums: albumsReducer}, {}),
-        EffectsModule.forRoot([ArtistEffects, AlbumEffects]),
+        StoreModule.forRoot({artists: artistsReducer, albums: albumsReducer, users: userReducer},
+          {}),
+        EffectsModule.forRoot([ArtistEffects, AlbumEffects, UsersEffects]),
         MatButtonModule,
         MatToolbarModule,
         MatButtonToggleModule,
