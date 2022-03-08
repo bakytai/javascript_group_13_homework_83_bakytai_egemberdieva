@@ -85,14 +85,21 @@ const run = async () => {
         duration: '5:56'
     });
 
-    const [sara, alina] = await User.create({
+    const [sara, alina, sergei] = await User.create({
         email: 'saikal@gmail.com',
         password: 'crazySaikal007',
+        displayName: 'sara',
         token: '5enDI2paOqusPavVWOnwB'
     }, {
         email: 'alina2mail.ru',
         password: 'crazyAlina',
+        displayName: 'alina',
         token: '8enDI2paOqusBavVWOnwL'
+    }, {
+        email: 'sergei@gmail.com',
+        password: '511202',
+        displayName: 'Boke',
+        token: '9enDI2oaOqusBaSDOnwL'
     });
 
     await TrackHistory.create({
