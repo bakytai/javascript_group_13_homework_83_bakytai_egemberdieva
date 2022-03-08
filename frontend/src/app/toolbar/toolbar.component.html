@@ -1,9 +1,11 @@
 <div>
-    <mat-toolbar color="primary" fxLayout="row" >
-      <span style="width: 50%">Last.FM</span>
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+      <span >Last.FM</span>
 
-      <div style="width: 50%; text-align: end">
-        <button mat-raised-button color="accent" routerLink="/">Artists</button>
-      </div>
+      <button mat-raised-button color="accent" routerLink="/">Artists</button>
+
+      <nav>
+        <a mat-button routerLink="/register">REGISTER</a>
+      </nav>
     </mat-toolbar>
 </div>

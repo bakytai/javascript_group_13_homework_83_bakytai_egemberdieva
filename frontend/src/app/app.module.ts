@@ -20,6 +20,10 @@ import { ArtistEffects } from './store/artist.effects';
 import { AlbumEffects } from './store/album.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ImagePipe } from './pipe/image.pipe';
+import { RegisterComponent } from './pages/register/register.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -27,21 +31,25 @@ import { ImagePipe } from './pipe/image.pipe';
     ToolbarComponent,
     ArtistsComponent,
     ArtistsAlbumsComponent,
-    ImagePipe
+    ImagePipe,
+    RegisterComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    StoreModule.forRoot({artists: artistsReducer, albums: albumsReducer}, {}),
-    EffectsModule.forRoot([ArtistEffects, AlbumEffects]),
-    MatButtonModule,
-    MatToolbarModule,
-    MatButtonToggleModule,
-    FlexModule,
-    MatCardModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        StoreModule.forRoot({artists: artistsReducer, albums: albumsReducer}, {}),
+        EffectsModule.forRoot([ArtistEffects, AlbumEffects]),
+        MatButtonModule,
+        MatToolbarModule,
+        MatButtonToggleModule,
+        FlexModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

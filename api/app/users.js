@@ -22,7 +22,7 @@ const upload = multer({storage});
 router.post('/', upload.single('avatar'),async (req, res, next) => {
     try {
         if (!req.body.email || !req.body.password || !req.body.displayName) {
-            return res.status(400).send({message: 'Titl and price are required'});
+            return res.status(400).send({message: 'Please complete all fields'});
         }
 
         const userData = {
