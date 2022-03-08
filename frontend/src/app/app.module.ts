@@ -24,10 +24,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ValidateIdenticalDirective,
     ToolbarComponent,
     ArtistsComponent,
     ArtistsAlbumsComponent,
