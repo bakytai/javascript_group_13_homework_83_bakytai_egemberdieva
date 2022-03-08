@@ -25,6 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
+import { FileInputComponent } from '../ui/file-input/file-input.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ValidateIdenticalDirective } from './directives/validate-identical.dire
     ToolbarComponent,
     ArtistsComponent,
     ArtistsAlbumsComponent,
+    FileInputComponent,
     ImagePipe,
     RegisterComponent
   ],
