@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
             query.artist = req.query.artist;
         }
 
-        const albums = await Album.find(query);
+        const albums = await Album.find(query).populate("artist", "name");
 
         return res.send(albums);
     } catch (e) {

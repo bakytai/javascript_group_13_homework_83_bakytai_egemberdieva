@@ -17,7 +17,7 @@ export class TracksService{
     return this.http.get<ApiTrackData[]>(environment.apiUrl + '/tracks?album=' + albumId).pipe(
       map(response => {
         return response.map(trackData => {
-          return new Track(trackData._id, trackData.artist, trackData.trackName, trackData.duration);
+          return new Track(trackData._id, trackData.trackName, trackData.duration);
         });
       })
     );

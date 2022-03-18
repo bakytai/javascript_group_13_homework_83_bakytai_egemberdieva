@@ -35,6 +35,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { TracksComponent } from './tracks/tracks.component';
+import { MatListModule } from '@angular/material/list';
+import { tracksReducer } from './store/track.reducer';
+import { TrackEffects } from './store/track.effects';
 
 @NgModule({
   declarations: [
@@ -56,9 +59,9 @@ import { TracksComponent } from './tracks/tracks.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({artists: artistsReducer, albums: albumsReducer, users: userReducer},
+    StoreModule.forRoot({artists: artistsReducer, albums: albumsReducer, users: userReducer, tracks: tracksReducer},
       {}),
-    EffectsModule.forRoot([ArtistEffects, AlbumEffects, UsersEffects]),
+    EffectsModule.forRoot([ArtistEffects, AlbumEffects, UsersEffects, TrackEffects]),
     MatButtonModule,
     MatToolbarModule,
     MatButtonToggleModule,
@@ -69,7 +72,8 @@ import { TracksComponent } from './tracks/tracks.component';
     MatSnackBarModule,
     MatIconModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

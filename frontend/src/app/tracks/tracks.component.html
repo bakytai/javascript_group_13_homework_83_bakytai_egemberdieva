@@ -1,1 +1,8 @@
-<p>tracks works!</p>
+<div>
+  <mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let track of tracks | async">
+      {{ track.trackName}} Duration: <span>{{ track.duration}}</span>
+      <a mat-button>To listen</a>
+    </mat-list-item>
+  </mat-list>
+</div>
