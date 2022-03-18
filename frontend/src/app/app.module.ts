@@ -29,6 +29,11 @@ import { FileInputComponent } from '../ui/file-input/file-input.component';
 import { userReducer } from './store/user.reducer';
 import { UsersEffects } from './store/user.effects';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoginComponent } from './login/login.component';
+import { CenteredCardComponent } from '../ui/centered-card/centered-card.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -39,26 +44,31 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ArtistsAlbumsComponent,
     FileInputComponent,
     ImagePipe,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent,
+    CenteredCardComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        StoreModule.forRoot({artists: artistsReducer, albums: albumsReducer, users: userReducer},
-          {}),
-        EffectsModule.forRoot([ArtistEffects, AlbumEffects, UsersEffects]),
-        MatButtonModule,
-        MatToolbarModule,
-        MatButtonToggleModule,
-        FlexModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSnackBarModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    StoreModule.forRoot({artists: artistsReducer, albums: albumsReducer, users: userReducer},
+      {}),
+    EffectsModule.forRoot([ArtistEffects, AlbumEffects, UsersEffects]),
+    MatButtonModule,
+    MatToolbarModule,
+    MatButtonToggleModule,
+    FlexModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatMenuModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
