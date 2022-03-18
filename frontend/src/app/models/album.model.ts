@@ -20,6 +20,6 @@ export interface ApiAlbumData {
   _id: string,
   title: string,
   year: string,
-  artist: {[key: string]: string},
+  artist: {name: string},
   image: string
 }
