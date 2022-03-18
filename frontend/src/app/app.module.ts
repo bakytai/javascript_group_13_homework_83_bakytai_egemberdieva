@@ -28,6 +28,7 @@ import { ValidateIdenticalDirective } from './directives/validate-identical.dire
 import { FileInputComponent } from '../ui/file-input/file-input.component';
 import { userReducer } from './store/user.reducer';
 import { UsersEffects } from './store/user.effects';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { UsersEffects } from './store/user.effects';
         FlexModule,
         MatCardModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatSnackBarModule
     ],
   providers: [],
   bootstrap: [AppComponent]
