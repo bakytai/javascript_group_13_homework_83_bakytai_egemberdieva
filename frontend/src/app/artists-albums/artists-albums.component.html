@@ -1,9 +1,9 @@
-<div fxLayout="row" style="padding: 20px">
+<div fxLayout="row" style="padding: 20px" routerLink="/tracks">
   <mat-card  *ngFor="let album of albums | async" class="example-card" style="width: 14rem; margin: 5px">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{ album.title }}</mat-card-title>
-      <mat-card-subtitle><b>Artist name: </b>{{ album.artist['name'] }}</mat-card-subtitle>
+      <mat-card-subtitle><b>Artist name: </b>{{ album.artist.name }}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-xl-image [src]="album.image | image" [alt]="'Photo of ' + album.title">
     <mat-card-content>

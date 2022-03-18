@@ -34,6 +34,7 @@ import { CenteredCardComponent } from '../ui/centered-card/centered-card.compone
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
+import { TracksComponent } from './tracks/tracks.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MatMenuModule } from '@angular/material/menu';
     ImagePipe,
     RegisterComponent,
     LoginComponent,
-    CenteredCardComponent
+    CenteredCardComponent,
+    TracksComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ export class Album {
     public id: string,
     public title: string,
     public year: string,
-    public artist: {[key: string]: string},
+    public artist: {name: string},
     public image: string,
   ) {}
 }
