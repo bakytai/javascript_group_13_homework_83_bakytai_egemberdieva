@@ -1,4 +1,6 @@
 const express = require('express');
+const auth = require("../middleware/auth");
+const permit = require("../middleware/permit");
 const Track = require("../models/Track");
 
 const router = express.Router();
@@ -20,7 +22,7 @@ router.get('/', async (req, res, next) => {
 });
 
 
-router.post('/', async (req, res, next) => {
+router.post('/',  auth, permit('admin'),async (req, res, next) => {
     try {
         if (!req.body.trackName || !req.body.album || !req.body.duration) {
             return res.status(400).send({message: 'Please fill out all fields'});
