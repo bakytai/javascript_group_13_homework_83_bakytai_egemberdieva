@@ -2,7 +2,7 @@ export class TrackHistory {
   constructor(
     public id: string,
     public artistName: {name: string},
-    public track: string,
+    public track: {name: string},
     public dateTime: string,
   ) {}
 }
@@ -14,6 +14,6 @@ export interface TrackHistoryData {
 export interface ApiTrackHistory {
   _id: string,
   artistName: {name: string},
-  track: string,
+  track: {name: string},
   dateTime: string
 }

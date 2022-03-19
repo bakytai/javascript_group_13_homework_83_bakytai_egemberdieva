@@ -16,7 +16,7 @@ export const fetchTrackHistoryFailure = createAction(
 
 export const createTrackHistoryRequest = createAction(
   '[TracksHistory] Create Request',
-  props<{trackHistoryData: TrackHistoryData}>()
+  props<{trackHistoryData: TrackHistoryData, token: string}>()
 );
 export const createTrackHistorySuccess = createAction(
   '[TracksHistory] Create Success'
