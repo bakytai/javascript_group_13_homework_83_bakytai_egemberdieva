@@ -25,6 +25,14 @@ export type TrackState = {
   fetchError: null | string,
 };
 
+export type TrackHistoryState = {
+  tracksHistory: Track[],
+  fetchLoading: boolean,
+  fetchError: null | string,
+  createLoading: boolean,
+  createError: null | string,
+};
+
 export type UserState = {
   user: null | User,
   registerLoading: boolean,

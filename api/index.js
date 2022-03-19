@@ -18,7 +18,7 @@ app.use('/artists', artists);
 app.use('/albums', albums);
 app.use('/tracks', tracks);
 app.use('/users', users);
-app.use('/track_history', tracksHistory);
+app.use('/tracksHistory', tracksHistory);
 
 const run = async () => {
     await mongoose.connect(config.mongo.db, config.mongo.options);

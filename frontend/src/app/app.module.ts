@@ -29,6 +29,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { TracksComponent } from './tracks/tracks.component';
 import { MatListModule } from '@angular/material/list';
 import { TrackHistoryComponent } from './track-history/track-history.component';
+import { AppStoreModule } from './app-store.module';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { TrackHistoryComponent } from './track-history/track-history.component';
     MatIconModule,
     MatSidenavModule,
     MatMenuModule,
-    MatListModule
+    MatListModule,
+    AppStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
