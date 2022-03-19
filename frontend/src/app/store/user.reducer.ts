@@ -17,7 +17,7 @@ const initialState: UserState = {
   loginError: null
 };
 
-export const userReducer = createReducer(
+export const usersReducer = createReducer(
   initialState,
   on(registerUserRequest, state => ({...state, registerLoading: true, registerError: null})),
   on(registerUserSuccess, (state, {user}) => ({...state, registerLoading: false, user})),

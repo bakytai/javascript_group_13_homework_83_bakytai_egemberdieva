@@ -8,7 +8,7 @@ import { fetchTrackFailure, fetchTrackRequest, fetchTrackSuccess } from './track
 
 @Injectable()
 
-export class TrackEffects {
+export class TracksEffects {
   constructor(
     private router: Router,
     private actions: Actions,

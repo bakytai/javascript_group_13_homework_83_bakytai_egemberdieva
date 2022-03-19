@@ -15,7 +15,7 @@ import {
 
 @Injectable()
 
-export class AlbumEffects {
+export class AlbumsEffects {
   fetchAlbums = createEffect(() => this.actions.pipe(
     ofType(fetchAlbumsRequest),
     mergeMap((artistId:{id: string}) => this.albumService.getAlbums(artistId.id).pipe(

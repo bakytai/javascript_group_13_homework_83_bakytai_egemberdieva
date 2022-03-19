@@ -31,4 +31,7 @@ export class TracksComponent implements OnInit {
     this.store.dispatch(fetchTrackRequest({id: id}));
   }
 
+  createTrackHistory(id: string) {
+
+  }
 }

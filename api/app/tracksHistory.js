@@ -10,7 +10,7 @@ router.post('/', auth, async (req, res, next) => {
 
         const trackHistoryData = {
             user: req.user._id,
-            track: req.body.track,
+            track: req.body.trackId,
             dateTime: date,
         };
 
@@ -25,5 +25,10 @@ router.post('/', auth, async (req, res, next) => {
     }
 });
 
-router.get
+
+router.get('/', auth, async (req, res, next) => {
+
+
+});
+
 module.exports = router;

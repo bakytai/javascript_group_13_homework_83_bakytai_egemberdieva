@@ -14,7 +14,7 @@ import {
 
 @Injectable()
 
-export class ArtistEffects {
+export class ArtistsEffects {
   fetchArtists = createEffect(() => this.actions.pipe(
     ofType(fetchArtistRequest),
     mergeMap(() => this.artistsService.getArtists().pipe(

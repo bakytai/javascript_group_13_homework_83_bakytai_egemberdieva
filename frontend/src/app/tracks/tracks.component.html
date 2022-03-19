@@ -1,8 +1,16 @@
-<div>
-  <mat-list role="list">
-    <mat-list-item role="listitem" *ngFor="let track of tracks | async">
-      {{ track.trackName}} Duration: <span>{{ track.duration}}</span>
-      <a mat-button>To listen</a>
-    </mat-list-item>
-  </mat-list>
+<div *ngFor="let track of tracks | async"
+     fxLayout="row" fxLayoutAlign="space-between" style="margin: 10px; width: 50rem;">
+      <div>
+        {{ track.trackName}}
+      </div>
+
+      <div>
+        Duration {{ track.duration}}
+      </div>
+
+      <div>
+        <a mat-button color="primary" style="border: black solid 1px" (click)="createTrackHistory(track.id)">
+          To listen
+        </a>
+      </div>
 </div>
