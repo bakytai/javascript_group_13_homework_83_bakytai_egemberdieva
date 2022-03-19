@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
 import { Router } from '@angular/router';
+import { TrackHistory } from '../models/trackHistory.model';
 
 @Component({
   selector: 'app-track-history',
@@ -13,15 +14,15 @@ import { Router } from '@angular/router';
 export class TrackHistoryComponent implements OnInit {
   userObj!: User;
   user: Observable<null | User>;
-  // tracksHistory: Observable<TrackHistory[]>;
+  tracksHistory: Observable<TrackHistory[]>;
   loading: Observable<boolean>;
   error: Observable<null | string>;
-  token!: string;
+
 
   constructor(private store: Store<AppState>, private router: Router) {
-
-    this.loading = store.select(state => state.tracks.fetchLoading);
-    this.error = store.select(state => state.tracks.fetchError);
+    this.tracksHistory = store.select(state => state.trackHistory.tracksHistory)
+    this.loading = store.select(state => state.trackHistory.fetchLoading);
+    this.error = store.select(state => state.trackHistory.fetchError);
     this.user = store.select(state => state.users.user);
   }
 
@@ -29,7 +30,6 @@ export class TrackHistoryComponent implements OnInit {
     this.user.subscribe(user => {
       if (user) {
         this.userObj = user;
-        this.token = this.userObj.token
       } else {
         void this.router.navigate(['/'])
       }

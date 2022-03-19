@@ -6,6 +6,9 @@ import { AppState } from '../store/types';
 import { ActivatedRoute } from '@angular/router';
 import { Track } from '../models/track.model';
 import { User } from '../models/user.model';
+import { createTrackHistoryRequest } from '../store/trackHistory.actions';
+import { HelpersService } from '../services/helpers.service';
+import { TrackHistoryData } from '../models/trackHistory.model';
 
 @Component({
   selector: 'app-tracks',
@@ -20,7 +23,7 @@ export class TracksComponent implements OnInit {
   error: Observable<null | string>;
   token!: string;
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private helpers: HelpersService) {
     this.tracks = store.select(state => state.tracks.tracks);
     this.loading = store.select(state => state.tracks.fetchLoading);
     this.error = store.select(state => state.tracks.fetchError);
@@ -43,6 +46,13 @@ export class TracksComponent implements OnInit {
   }
 
   createTrackHistory(id: string) {
-
+    if (this.userObj) {
+      const trackHistoryData: TrackHistoryData = {
+        trackId: id
+      };
+      this.store.dispatch(createTrackHistoryRequest({trackHistoryData}));
+    } else {
+      this.helpers.openSnackbar('Log in to your account!');
+    }
   }
 }

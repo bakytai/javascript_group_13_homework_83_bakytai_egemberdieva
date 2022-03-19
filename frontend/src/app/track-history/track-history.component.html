@@ -1,1 +1,14 @@
-<p>track-history works!</p>
+<div *ngFor="let trackHistory of tracksHistory | async"
+     fxLayout="row" fxLayoutAlign="space-between" style="margin: 10px; width: 50rem;">
+  <div>
+    {{ trackHistory.artistName}}
+  </div>
+
+  <div>
+    {{ trackHistory.track }}
+  </div>
+
+  <div>
+    date: {{ trackHistory.dateTime }}
+  </div>
+</div>

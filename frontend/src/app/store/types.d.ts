@@ -46,5 +46,6 @@ export type AppState = {
   artists: ArtistState,
   albums: AlbumState,
   tracks: TrackState,
+  trackHistory: TrackHistoryState
   users: UserState
 }

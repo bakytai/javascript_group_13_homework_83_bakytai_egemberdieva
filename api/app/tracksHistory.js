@@ -1,7 +1,6 @@
 const express = require('express');
 const auth = require("../middleware/auth");
 const TrackHistory = require("../models/TrackHistory");
-const Track = require("../models/Track");
 
 const router = express.Router();
 
@@ -32,16 +31,26 @@ router.post('/', auth, async (req, res, next) => {
 router.get('/', auth, async (req, res, next) => {
     try {
         const query = {};
-        const newObj = {};
 
         if (req.user) {
-            query.artist = req.user._id;
+            query.user = req.user._id;
         }
 
-        const trackHistory = await TrackHistory.find(query);
+        const trackHistory = await TrackHistory.find(query).populate({
+            path:  "track"  ,
+            select: 'name',
+            populate: {
+                path:  'album',
+                select: 'artist',
+                populate: {
+                    path: 'artist',
+                    select: 'name',
+                }
+            }
+        });
 
+        console.log(trackHistory)
         res.send(trackHistory);
-
     } catch (e) {
         next(e)
     }
