@@ -17,7 +17,7 @@ export class TrackHistoryService {
     }).pipe(
       map(response => {
         return response.map(trackData => {
-          return new TrackHistory(trackData._id, trackData.artistName, trackData.track, trackData.dateTime);
+          return new TrackHistory(trackData._id, trackData.user, trackData.track, trackData.dateTime);
         });
       })
     );

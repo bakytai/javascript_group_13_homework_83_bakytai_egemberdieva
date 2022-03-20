@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/', auth, async (req, res, next) => {
     try {
-        const date = new Date().toString();
+        const date = new Date().toISOString();
 
         const trackHistoryData = {
             user: req.user._id,
@@ -14,11 +14,10 @@ router.post('/', auth, async (req, res, next) => {
             dateTime: date,
         };
 
-        const trackHistory = new TrackHistory(trackHistoryData);
+        const trackHistory = await new TrackHistory(trackHistoryData);
 
-        await trackHistory.save();
+        trackHistory.save();
 
-        console.log(trackHistory);
 
         return res.send(trackHistory)
 
@@ -36,9 +35,9 @@ router.get('/', auth, async (req, res, next) => {
             query.user = req.user._id;
         }
 
-        const trackHistory = await TrackHistory.find(query).populate({
+        const trackHistory = await TrackHistory.find(query).sort({_id:-1}).populate({
             path:  "track"  ,
-            select: 'name',
+            select: 'trackName',
             populate: {
                 path:  'album',
                 select: 'artist',
@@ -49,7 +48,7 @@ router.get('/', auth, async (req, res, next) => {
             }
         });
 
-        console.log(trackHistory)
+
         res.send(trackHistory);
     } catch (e) {
         next(e)

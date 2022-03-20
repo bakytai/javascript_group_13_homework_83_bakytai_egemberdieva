@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
 import { ActivatedRoute } from '@angular/router';
-import { Track } from '../models/track.model';
+import { TrackModel } from '../models/track.model';
 import { User } from '../models/user.model';
 import { createTrackHistoryRequest } from '../store/trackHistory.actions';
 import { HelpersService } from '../services/helpers.service';
@@ -18,7 +18,7 @@ import { TrackHistoryData } from '../models/trackHistory.model';
 export class TracksComponent implements OnInit {
   userObj!: User;
   user: Observable<null | User>;
-  tracks: Observable<Track[]>;
+  tracks: Observable<TrackModel[]>;
   loading: Observable<boolean>;
   error: Observable<null | string>;
   token!: string;

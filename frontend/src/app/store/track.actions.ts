@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Track } from '../models/track.model';
+import { TrackModel } from '../models/track.model';
 
 export const fetchTrackRequest = createAction(
   '[Track] Fetch Request',
@@ -7,7 +7,7 @@ export const fetchTrackRequest = createAction(
 );
 export const fetchTrackSuccess = createAction(
   '[Track] Fetch Success',
-  props<{tracks: Track[]}>()
+  props<{tracks: TrackModel[]}>()
 );
 export const fetchTrackFailure = createAction(
   '[Track] Fetch Failure',

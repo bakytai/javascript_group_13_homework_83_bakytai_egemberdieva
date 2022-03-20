@@ -1,8 +1,11 @@
+import { User } from './user.model';
+import { TrackModel } from './track.model';
+
 export class TrackHistory {
   constructor(
     public id: string,
-    public artistName: {name: string},
-    public track: {name: string},
+    public user: User,
+    public track: TrackModel,
     public dateTime: string,
   ) {}
 }
@@ -13,7 +16,7 @@ export interface TrackHistoryData {
 
 export interface ApiTrackHistory {
   _id: string,
-  artistName: {name: string},
-  track: {name: string},
+  user: User,
+  track: TrackModel,
   dateTime: string
 }

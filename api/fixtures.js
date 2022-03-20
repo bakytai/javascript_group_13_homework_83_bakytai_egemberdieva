@@ -160,13 +160,13 @@ const run = async () => {
 
     const [sara, alina] = await User.create({
         email: 'saikal@gmail.com',
-        password: 'crazySaikal007',
+        password: '000',
         displayName: 'sara',
         role: 'admin',
         token: '5enDI2paOqusPavVWOnwB'
     }, {
-        email: 'alina2mail.ru',
-        password: 'crazyAlina',
+        email: 'alina@mail.ru',
+        password: '000',
         displayName: 'alina',
         role: 'user',
         token: '8enDI2paOqusBavVWOnwL'

@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
 import { Router } from '@angular/router';
 import { TrackHistory } from '../models/trackHistory.model';
+import { fetchTrackHistoryRequest } from '../store/trackHistory.actions';
 
 @Component({
   selector: 'app-track-history',
@@ -18,11 +19,10 @@ export class TrackHistoryComponent implements OnInit {
   loading: Observable<boolean>;
   error: Observable<null | string>;
 
-
   constructor(private store: Store<AppState>, private router: Router) {
-    this.tracksHistory = store.select(state => state.trackHistory.tracksHistory)
-    this.loading = store.select(state => state.trackHistory.fetchLoading);
-    this.error = store.select(state => state.trackHistory.fetchError);
+    this.tracksHistory = store.select(state => state.tracksHistory.tracksHistory);
+    this.loading = store.select(state => state.tracksHistory.fetchLoading);
+    this.error = store.select(state => state.tracksHistory.fetchError);
     this.user = store.select(state => state.users.user);
   }
 
@@ -34,6 +34,8 @@ export class TrackHistoryComponent implements OnInit {
         void this.router.navigate(['/'])
       }
     });
+    this.store.dispatch(fetchTrackHistoryRequest());
   }
+
 
 }

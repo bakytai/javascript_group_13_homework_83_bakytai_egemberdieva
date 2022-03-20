@@ -1,11 +1,11 @@
 <div *ngFor="let trackHistory of tracksHistory | async"
      fxLayout="row" fxLayoutAlign="space-between" style="margin: 10px; width: 50rem;">
   <div>
-    {{ trackHistory.artistName}}
+    {{ trackHistory.track.album.artist.name}}
   </div>
 
   <div>
-    {{ trackHistory.track }}
+    {{ trackHistory.track.trackName }}
   </div>
 
   <div>

@@ -63,10 +63,10 @@ export class UsersEffects {
         return this.usersService.logout(user.token).pipe(
           map(() => logoutUser()),
           tap(() => this.helpers.openSnackbar('Logout successful'))
-        );
+        )
       }
 
       return NEVER;
-    }))
-  )
+    })
+  ))
 }

@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
-import { logoutUserRequest } from '../store/user.actions';
+import { logoutUser } from '../store/user.actions';
 
 @Component({
   selector: 'app-toolbar',
@@ -29,7 +29,7 @@ export class ToolbarComponent  {
   }
 
   logout() {
-    this.store.dispatch(logoutUserRequest());
+    this.store.dispatch(logoutUser());
   }
 
 }
