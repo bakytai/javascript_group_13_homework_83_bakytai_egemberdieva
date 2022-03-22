@@ -23,3 +23,17 @@ export const createArtistFailure = createAction(
   '[Artists] Create Failure',
   props<{error: string}>()
 );
+
+export const deleteArtistRequest = createAction(
+  '[Artists] Delete Request',
+  props<{id: string}>()
+);
+export const deleteArtistSuccess = createAction(
+  '[Artists] Delete Success'
+);
+export const deleteArtistFailure = createAction(
+  '[Artists] Delete Failure',
+  props<{error: string}>()
+);
+
+

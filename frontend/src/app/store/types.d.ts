@@ -10,6 +10,8 @@ export type ArtistState = {
   fetchError: null | string,
   createLoading: boolean,
   createError: null | string,
+  deleteLoading: boolean,
+  deleteError: null | string
 };
 
 export type AlbumState = {
@@ -18,12 +20,18 @@ export type AlbumState = {
   fetchError: null | string,
   createLoading: boolean,
   createError: null | string,
+  deleteLoading: boolean,
+  deleteError: null | string
 };
 
 export type TrackState = {
   tracks: TrackModel[],
   fetchLoading: boolean,
   fetchError: null | string,
+  createLoading: boolean,
+  createError: null | string,
+  deleteLoading: boolean,
+  deleteError: null | string
 };
 
 export type TrackHistoryState = {

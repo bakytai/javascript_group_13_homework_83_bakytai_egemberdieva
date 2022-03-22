@@ -25,3 +25,15 @@ export const createTrackFailure = createAction(
   '[Track] Create Failure',
   props<{error: string}>()
 );
+
+export const deleteTrackRequest = createAction(
+  '[Track] Delete Request',
+  props<{id: string}>()
+);
+export const deleteTrackSuccess = createAction(
+  '[Track] Delete Success'
+);
+export const deleteTrackFailure = createAction(
+  '[Track] Delete Failure',
+  props<{error: string}>()
+)

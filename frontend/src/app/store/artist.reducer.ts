@@ -3,7 +3,8 @@ import { createReducer, on } from '@ngrx/store';
 import {
   createArtistFailure,
   createArtistRequest,
-  createArtistSuccess,
+  createArtistSuccess, deleteArtistFailure,
+  deleteArtistRequest, deleteArtistSuccess,
   fetchArtistFailure,
   fetchArtistRequest,
   fetchArtistSuccess
@@ -15,6 +16,8 @@ const initialState: ArtistState = {
   fetchError: null,
   createLoading: false,
   createError: null,
+  deleteLoading: false,
+  deleteError: null
 };
 
 export const artistsReducer = createReducer(
@@ -30,6 +33,13 @@ export const artistsReducer = createReducer(
   on(createArtistRequest, state => ({...state, createLoading: true})),
   on(createArtistSuccess, state => ({...state, createLoading: false})),
   on(createArtistFailure, (state, {error}) => ({
+    ...state,
+    createLoading: false,
+    createError: error})),
+
+  on(deleteArtistRequest, state => ({...state, createLoading: true})),
+  on(deleteArtistSuccess, state => ({...state, createLoading: false})),
+  on(deleteArtistFailure, (state, {error}) => ({
     ...state,
     createLoading: false,
     createError: error})),

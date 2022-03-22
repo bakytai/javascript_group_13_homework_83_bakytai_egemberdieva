@@ -25,3 +25,15 @@ export const createAlbumFailure = createAction(
   '[Albums] Create Failure',
   props<{error: string}>()
 );
+
+export const deleteAlbumRequest = createAction(
+  '[Albums] Delete Request',
+  props<{id: string}>()
+);
+export const deleteAlbumSuccess = createAction(
+  '[Albums] Delete Success'
+);
+export const deleteAlbumFailure = createAction(
+  '[Albums] Delete Failure',
+  props<{error: string}>()
+);

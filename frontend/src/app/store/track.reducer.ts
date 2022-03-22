@@ -12,7 +12,11 @@ import {
 export const initialState: TrackState = {
   tracks: [],
   fetchLoading: false,
-  fetchError: null
+  fetchError: null,
+  createLoading: false,
+  createError: null,
+  deleteLoading: false,
+  deleteError: null
 };
 
 export const tracksReducer = createReducer(

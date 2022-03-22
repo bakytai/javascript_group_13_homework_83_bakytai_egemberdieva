@@ -34,4 +34,8 @@ export class ArtistsService {
 
     return this.http.post(environment.apiUrl + '/artists', formData);
   }
+
+  deleteArtist(id: string) {
+    return this.http.delete(environment.apiUrl + '/artists/' + id);
+  }
 }

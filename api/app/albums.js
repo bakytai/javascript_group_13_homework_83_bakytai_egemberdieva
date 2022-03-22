@@ -92,4 +92,15 @@ router.delete('/:id', auth, async (req,res,next) => {
     }
 });
 
+router.post('/:id/publish', auth, async (req,res,next) => {
+    try {
+        if (req.user.role === 'admin') {
+            const isPublishAlbum = await Album.findById(req.params.id);
+
+        }
+    } catch (e) {
+        next(e);
+    }
+});
+
 module.exports = router;

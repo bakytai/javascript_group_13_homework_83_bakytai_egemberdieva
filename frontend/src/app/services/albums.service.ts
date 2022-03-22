@@ -31,5 +31,9 @@ export class AlbumsService {
     });
 
     return this.http.post(environment.apiUrl + '/albums', formData);
+  };
+
+  deleteAlbum(id: string) {
+    return this.http.delete(environment.apiUrl + '/albums/' + id);
   }
 }
