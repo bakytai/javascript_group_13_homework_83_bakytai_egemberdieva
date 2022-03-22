@@ -11,7 +11,9 @@ export type ArtistState = {
   createLoading: boolean,
   createError: null | string,
   deleteLoading: boolean,
-  deleteError: null | string
+  deleteError: null | string,
+  changeLoading: boolean,
+  changError: null | string
 };
 
 export type AlbumState = {
@@ -21,7 +23,9 @@ export type AlbumState = {
   createLoading: boolean,
   createError: null | string,
   deleteLoading: boolean,
-  deleteError: null | string
+  deleteError: null | string,
+  changeLoading: boolean,
+  changError: null | string
 };
 
 export type TrackState = {
@@ -31,7 +35,9 @@ export type TrackState = {
   createLoading: boolean,
   createError: null | string,
   deleteLoading: boolean,
-  deleteError: null | string
+  deleteError: null | string,
+  changeLoading: boolean,
+  changError: null | string
 };
 
 export type TrackHistoryState = {

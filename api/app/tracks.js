@@ -51,8 +51,10 @@ router.post('/',  auth, async (req, res, next) => {
 router.delete('/:id', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
-
+            await Track.deleteOne({_id: req.params.id})
         }
+
+
     } catch (e) {
         next(e);
     }

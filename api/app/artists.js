@@ -1,10 +1,11 @@
 const express = require('express');
-const Artist = require('../models/Artist');
 const multer = require("multer");
 const config = require("../config");
 const {nanoid} = require("nanoid");
 const path = require("path");
 const auth = require("../middleware/auth");
+const Artist = require('../models/Artist');
+const Track = require('../models/Track')
 
 const router = express.Router();
 
@@ -73,8 +74,11 @@ router.post('/:id/publish', auth, async (req,res,next) => {
 router.delete('/:id', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
-
+            await Artist.deleteOne({_id: req.params.id});
+            await Track.deleteMany({album: req.params.id});
         }
+
+
     } catch (e) {
         next(e);
     }

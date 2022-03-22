@@ -31,9 +31,24 @@ export const deleteTrackRequest = createAction(
   props<{id: string}>()
 );
 export const deleteTrackSuccess = createAction(
-  '[Track] Delete Success'
+  '[Track] Delete Success',
+  props<{tracks: TrackModel[]}>()
+
 );
 export const deleteTrackFailure = createAction(
   '[Track] Delete Failure',
   props<{error: string}>()
-)
+);
+
+export const publishTrackRequest = createAction(
+  '[Track] Publish Request',
+  props<{id: string}>()
+);
+export const publishTrackSuccess = createAction(
+  '[Track] Publish Success',
+  props<{tracks: TrackModel[]}>()
+);
+export const publishTrackFailure = createAction(
+  '[Track] Publish Failure',
+  props<{error: string}>()
+);

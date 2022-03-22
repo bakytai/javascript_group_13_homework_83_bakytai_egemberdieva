@@ -3,11 +3,16 @@ import { createReducer, on } from '@ngrx/store';
 import {
   createAlbumFailure,
   createAlbumRequest,
-  createAlbumSuccess, deleteAlbumFailure, deleteAlbumRequest,
+  createAlbumSuccess,
+  deleteAlbumFailure,
+  deleteAlbumRequest,
   deleteAlbumSuccess,
   fetchAlbumsFailure,
   fetchAlbumsRequest,
-  fetchAlbumsSuccess
+  fetchAlbumsSuccess,
+  publishAlbumsFailure,
+  publishAlbumsRequest,
+  publishAlbumsSuccess
 } from './album.actions';
 
 export const initialState: AlbumState = {
@@ -17,7 +22,9 @@ export const initialState: AlbumState = {
   createLoading: false,
   createError: null,
   deleteLoading: false,
-  deleteError: null
+  deleteError: null,
+  changeLoading: false,
+  changError: null
 };
 
 export const albumsReducer = createReducer(
@@ -30,6 +37,14 @@ export const albumsReducer = createReducer(
     fetchError: error
   })),
 
+  on(publishAlbumsRequest, state => ({...state, changeLoading: true})),
+  on(publishAlbumsSuccess, (state, {albums}) => ({...state, changeLoading: false, albums})),
+  on(publishAlbumsFailure, (state, {error}) => ({
+    ...state,
+    changeLoading: false,
+    changError: error
+  })),
+
   on(createAlbumRequest, state => ({...state, createLoading: true})),
   on(createAlbumSuccess, state => ({...state, createLoading: false})),
   on(createAlbumFailure, (state, {error}) => ({
@@ -37,11 +52,13 @@ export const albumsReducer = createReducer(
     createLoading: false,
     createError: error})),
 
-  on(deleteAlbumRequest, state => ({...state, createLoading: true})),
-  on(deleteAlbumSuccess, state => ({...state, createLoading: false})),
+  on(deleteAlbumRequest, state => ({...state, deleteLoading: true})),
+  on(deleteAlbumSuccess, (state, {albums}) => ({...state, deleteLoading: false, albums})),
   on(deleteAlbumFailure, (state, {error}) => ({
     ...state,
-    createLoading: false,
-    createError: error})),
+    deleteLoading: false,
+    deleteError: error})),
+
+
 )
 

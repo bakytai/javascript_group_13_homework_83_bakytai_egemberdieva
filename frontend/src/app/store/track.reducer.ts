@@ -4,9 +4,15 @@ import {
   createTrackFailure,
   createTrackRequest,
   createTrackSuccess,
+  deleteTrackFailure,
+  deleteTrackRequest,
+  deleteTrackSuccess,
   fetchTrackFailure,
   fetchTrackRequest,
-  fetchTrackSuccess
+  fetchTrackSuccess,
+  publishTrackFailure,
+  publishTrackRequest,
+  publishTrackSuccess
 } from './track.actions';
 
 export const initialState: TrackState = {
@@ -16,7 +22,9 @@ export const initialState: TrackState = {
   createLoading: false,
   createError: null,
   deleteLoading: false,
-  deleteError: null
+  deleteError: null,
+  changeLoading: false,
+  changError: null
 };
 
 export const tracksReducer = createReducer(
@@ -28,10 +36,26 @@ export const tracksReducer = createReducer(
     fetchLoading: false,
     fetchError: error
   })),
+
+  on(publishTrackRequest, state => ({...state, changeLoading: true})),
+  on(publishTrackSuccess, (state, {tracks}) => ({...state, changeLoading: false, tracks})),
+  on(publishTrackFailure, (state, {error}) => ({
+    ...state,
+    changeLoading: false,
+    changError: error
+  })),
+
   on(createTrackRequest, state => ({...state, createLoading: true})),
   on(createTrackSuccess, state => ({...state, createLoading: false})),
   on(createTrackFailure, (state, {error}) => ({
     ...state,
     createLoading: false,
     createError: error})),
+
+  on(deleteTrackRequest, state => ({...state, deleteLoading: true})),
+  on(deleteTrackSuccess, state => ({...state, deleteLoading: false})),
+  on(deleteTrackFailure, (state, {error}) => ({
+    ...state,
+    deleteLoading: false,
+    deleteError: error})),
 )

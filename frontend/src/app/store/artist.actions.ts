@@ -29,10 +29,24 @@ export const deleteArtistRequest = createAction(
   props<{id: string}>()
 );
 export const deleteArtistSuccess = createAction(
-  '[Artists] Delete Success'
+  '[Artists] Delete Success',
+  props<{artists: Artist[]}>()
 );
 export const deleteArtistFailure = createAction(
   '[Artists] Delete Failure',
+  props<{error: string}>()
+);
+
+export const publishArtistRequest = createAction(
+  '[Artists] Publish Request',
+  props<{id: string}>()
+);
+export const publishArtistSuccess = createAction(
+  '[Artists] Publish Success',
+  props<{artists: Artist[]}>()
+);
+export const publishArtistFailure = createAction(
+  '[Artists] Publish Failure',
   props<{error: string}>()
 );
 

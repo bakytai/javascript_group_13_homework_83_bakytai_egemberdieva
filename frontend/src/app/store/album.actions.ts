@@ -31,9 +31,23 @@ export const deleteAlbumRequest = createAction(
   props<{id: string}>()
 );
 export const deleteAlbumSuccess = createAction(
-  '[Albums] Delete Success'
+  '[Albums] Delete Success',
+  props<{albums: Album[]}>()
 );
 export const deleteAlbumFailure = createAction(
   '[Albums] Delete Failure',
+  props<{error: string}>()
+);
+
+export const publishAlbumsRequest = createAction(
+  '[Albums] Publish Request',
+  props<{id: string}>()
+);
+export const publishAlbumsSuccess = createAction(
+  '[Albums] Publish Success',
+  props<{albums: Album[]}>()
+);
+export const publishAlbumsFailure = createAction(
+  '[Albums] Publish Failure',
   props<{error: string}>()
 );

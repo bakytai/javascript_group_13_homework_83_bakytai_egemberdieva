@@ -7,6 +7,7 @@ export class Album {
     public year: string,
     public artist: Artist,
     public image: string,
+    public is_publish: boolean
   ) {}
 }
 
@@ -23,5 +24,6 @@ export interface ApiAlbumData {
   title: string,
   year: string,
   artist: Artist,
-  image: string
+  image: string,
+  is_publish: boolean
 }

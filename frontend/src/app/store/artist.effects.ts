@@ -6,10 +6,17 @@ import { catchError, mergeMap, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   createArtistFailure,
-  createArtistRequest, createArtistSuccess,
+  createArtistRequest,
+  createArtistSuccess,
+  deleteArtistFailure,
+  deleteArtistRequest,
+  deleteArtistSuccess,
   fetchArtistFailure,
   fetchArtistRequest,
-  fetchArtistSuccess
+  fetchArtistSuccess,
+  publishArtistFailure,
+  publishArtistRequest,
+  publishArtistSuccess
 } from './artist.actions';
 import { HelpersService } from '../services/helpers.service';
 
@@ -29,10 +36,32 @@ export class ArtistsEffects {
     mergeMap(({artistData}) => this.artistsService.createArtist(artistData).pipe(
       map(() => createArtistSuccess()),
       tap(() => {
-        this.router.navigate(['/']);
+        void this.router.navigate(['/']);
         this.helpers.openSnackbar('Artist saved!');
       }),
       catchError(() => of(createArtistFailure({error: 'Wrong Data'})))
+    ))
+  ));
+
+  deleteArtist = createEffect(() => this.actions.pipe(
+    ofType(deleteArtistRequest),
+    mergeMap(({id}) => this.artistsService.deleteArtist(id).pipe(
+      map(artists => deleteArtistSuccess({artists})),
+      tap(() => {
+        this.helpers.openSnackbar('Artist deleted!');
+      }),
+      catchError(() => of(deleteArtistFailure({error: 'Wrong Data'})))
+    ))
+  ));
+
+ publishArtist = createEffect(() => this.actions.pipe(
+    ofType(publishArtistRequest),
+    mergeMap(({id}) => this.artistsService.getPublish(id).pipe(
+      map(artists => publishArtistSuccess({artists})),
+      tap(() => {
+        this.helpers.openSnackbar('Artist published!');
+      }),
+      catchError(() => of(publishArtistFailure({error: 'Wrong Data'})))
     ))
   ));
 

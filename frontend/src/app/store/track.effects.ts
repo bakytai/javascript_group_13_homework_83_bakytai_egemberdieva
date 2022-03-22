@@ -8,9 +8,15 @@ import {
   createTrackFailure,
   createTrackRequest,
   createTrackSuccess,
+  deleteTrackFailure,
+  deleteTrackRequest,
+  deleteTrackSuccess,
   fetchTrackFailure,
   fetchTrackRequest,
-  fetchTrackSuccess
+  fetchTrackSuccess,
+  publishTrackFailure,
+  publishTrackRequest,
+  publishTrackSuccess
 } from './track.actions';
 import { HelpersService } from '../services/helpers.service';
 
@@ -37,10 +43,32 @@ export class TracksEffects {
     mergeMap(({trackData}) => this.trackService.createTrack(trackData).pipe(
       map(() => createTrackSuccess()),
       tap(() => {
-        this.router.navigate(['/']);
+        void this.router.navigate(['/']);
         this.helpers.openSnackbar('Track saved!');
       }),
       catchError(() => of(createTrackFailure({error: 'Wrong Data'})))
+    ))
+  ));
+
+  deleteTrack = createEffect(() => this.actions.pipe(
+    ofType(deleteTrackRequest),
+    mergeMap(({id}) => this.trackService.deleteTrack(id).pipe(
+      map(tracks => deleteTrackSuccess({tracks})),
+      tap(() => {
+        this.helpers.openSnackbar('Track deleted!');
+      }),
+      catchError(() => of(deleteTrackFailure({error: 'Wrong Data'})))
+    ))
+  ));
+
+  publishTrack = createEffect(() => this.actions.pipe(
+    ofType(publishTrackRequest),
+    mergeMap(({id}) => this.trackService.getPublish(id).pipe(
+      map(tracks => publishTrackSuccess({tracks})),
+      tap(() => {
+        this.helpers.openSnackbar('Tracks published!');
+      }),
+      catchError(() => of(publishTrackFailure({error: 'Wrong Data'})))
     ))
   ));
 }

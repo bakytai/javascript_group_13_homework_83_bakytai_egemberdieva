@@ -17,7 +17,17 @@ export class ArtistsService {
     return this.http.get<ApiArtistData[]>(environment.apiUrl + '/artists').pipe(
       map(response => {
         return response.map(artistData => {
-          return new Artist(artistData._id, artistData.name, artistData.information, artistData.image);
+          return new Artist(artistData._id, artistData.name, artistData.information, artistData.image, artistData.is_publish);
+        });
+      })
+    );
+  }
+
+  getPublish(id: string) {
+    return this.http.post<ApiArtistData[]>(environment.apiUrl + `/artists/${id}/publish`, {is_publish: true}).pipe(
+      map(response => {
+        return response.map(artistData => {
+          return new Artist(artistData._id, artistData.name, artistData.information, artistData.image, artistData.is_publish);
         });
       })
     );
@@ -36,6 +46,14 @@ export class ArtistsService {
   }
 
   deleteArtist(id: string) {
-    return this.http.delete(environment.apiUrl + '/artists/' + id);
+    return this.http.delete<ApiArtistData[]>(environment.apiUrl + '/artists/' + id).pipe(
+      map(response => {
+        return response.map(artistData => {
+          return new Artist(artistData._id, artistData.name, artistData.information, artistData.image, artistData.is_publish);
+        });
+      })
+    );
   }
+
+
 }

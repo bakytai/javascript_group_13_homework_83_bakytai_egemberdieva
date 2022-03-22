@@ -17,17 +17,33 @@ export class TracksService{
     return this.http.get<ApiTrackData[]>(environment.apiUrl + '/tracks?album=' + albumId).pipe(
       map(response => {
         return response.map(trackData => {
-          return new TrackModel(trackData._id, trackData.album, trackData.trackName, trackData.duration);
+          return new TrackModel(trackData._id, trackData.album, trackData.trackName, trackData.duration, trackData.is_publish);
         });
       })
     );
   };
+
+  getPublish(id: string) {
+    return this.http.post<ApiTrackData[]>(environment.apiUrl + `/tracks/${id}/publish`, {is_publish: true}).pipe(
+      map(response => {
+        return response.map(trackData => {
+          return new TrackModel(trackData._id, trackData.album, trackData.trackName, trackData.duration, trackData.is_publish);
+        });
+      })
+    );
+  }
 
   createTrack(trackData: TrackData) {
     return this.http.post(environment.apiUrl + '/tracks', trackData);
   }
 
   deleteTrack(id: string) {
-    return this.http.delete(environment.apiUrl + '/tracks/' + id);
+    return this.http.delete<ApiTrackData[]>(environment.apiUrl + '/tracks/' + id).pipe(
+      map(response => {
+        return response.map(trackData => {
+          return new TrackModel(trackData._id, trackData.album, trackData.trackName, trackData.duration, trackData.is_publish);
+        });
+      })
+    );
   }
 }

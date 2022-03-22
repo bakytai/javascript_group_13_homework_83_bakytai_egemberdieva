@@ -4,6 +4,7 @@ export class Artist {
     public name: string,
     public information: string,
     public image: string,
+    public is_publish: boolean
   ) {}
 }
 
@@ -18,5 +19,6 @@ export interface ApiArtistData {
   _id: string,
   name: string,
   information: string,
-  image: string
+  image: string,
+  is_publish: boolean
 }
