@@ -5,7 +5,9 @@ const {nanoid} = require("nanoid");
 const path = require("path");
 const auth = require("../middleware/auth");
 const Artist = require('../models/Artist');
-const Track = require('../models/Track')
+const Track = require('../models/Track');
+const Album = require('../models/Album')
+
 
 const router = express.Router();
 
@@ -64,8 +66,13 @@ router.post('/:id/publish', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
             const isPublishArtist = await Artist.findById(req.params.id);
-
+            isPublishArtist.is_publish = true;
+            const artists = await Artist.find();
+            return res.send(artists);
         }
+
+        return res.send({message: 'You cannot modify!'});
+
     } catch (e) {
         next(e);
     }
@@ -74,11 +81,15 @@ router.post('/:id/publish', auth, async (req,res,next) => {
 router.delete('/:id', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
+            const albums = await Album.find({artist: req.params.id});
             await Artist.deleteOne({_id: req.params.id});
-            await Track.deleteMany({album: req.params.id});
+            await Album.deleteMany({album: req.params.id});
+            await Track.deleteMany({album: {$in: albums}});
+            const artists = await Artist.find();
+            return res.send(artists);
         }
 
-
+        return res.send({message: 'You cannot delete!'});
     } catch (e) {
         next(e);
     }

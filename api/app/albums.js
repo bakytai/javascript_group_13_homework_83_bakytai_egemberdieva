@@ -4,6 +4,7 @@ const path = require('path');
 const { nanoid } = require('nanoid');
 const config = require('../config');
 const Album = require("../models/Album");
+const Track = require("../models/Track");
 const auth = require("../middleware/auth");
 
 
@@ -85,8 +86,13 @@ router.post('/', auth, upload.single('image'), async (req, res, next) => {
 router.delete('/:id', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
-
+            await Album.deleteOne({_id: req.params.id});
+            await Track.deleteMany({album: req.params.id});
+            const albums = await Album.find();
+            return res.send(albums);
         }
+
+        return res.send({message: 'You cannot delete!'});
     } catch (e) {
         next(e);
     }
@@ -96,8 +102,12 @@ router.post('/:id/publish', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
             const isPublishAlbum = await Album.findById(req.params.id);
-
+            isPublishAlbum.is_publish = true;
+            const albums = await Album.find();
+            return res.send(albums);
         }
+        return res.send({message: 'You cannot modify!'});
+
     } catch (e) {
         next(e);
     }
