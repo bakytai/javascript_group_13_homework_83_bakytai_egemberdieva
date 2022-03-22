@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
 export class PublishDirective implements OnInit, OnDestroy{
   userSub!: Subscription;
   user: Observable<null | User>;
-  @Input('appPublish') publish!: boolean;
+  @Input('appPublish') publish!: {roles: string[], ispl: boolean};
   @Input('appPublishElse') elseTemplate?: TemplateRef<any>;
 
   constructor(
@@ -24,7 +24,7 @@ export class PublishDirective implements OnInit, OnDestroy{
     this.userSub = this.user.subscribe(user => {
       this.viewContainer.clear();
 
-      if (!this.publish) {
+      if (user && this.publish.roles.includes(user.role) && !this.publish) {
         this.viewContainer.createEmbeddedView(this.templateRef);
       } else if (this.elseTemplate) {
         this.viewContainer.createEmbeddedView(this.elseTemplate);
