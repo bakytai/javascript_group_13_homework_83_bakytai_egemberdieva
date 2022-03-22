@@ -35,6 +35,8 @@ import { EditAlbumsComponent } from './artists-albums/edit-albums/edit-albums.co
 import { EditArtistsComponent } from './artists/edit-artists/edit-artists.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AuthInterceptor } from './auth.interceptor';
+import { HasRolesDirective } from './directives/has-roles.directive';
+import { UserTypeDirective } from './directives/user-type.directive';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { AuthInterceptor } from './auth.interceptor';
     TrackHistoryComponent,
     EditTracksComponent,
     EditAlbumsComponent,
-    EditArtistsComponent
+    EditArtistsComponent,
+    HasRolesDirective,
+    UserTypeDirective,
   ],
   imports: [
     BrowserModule,

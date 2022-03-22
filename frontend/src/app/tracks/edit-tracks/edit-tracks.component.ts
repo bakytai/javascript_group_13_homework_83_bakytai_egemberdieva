@@ -4,6 +4,7 @@ import { AppState } from '../../store/types';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Album } from '../../models/album.model';
+import { fetchAlbumsRequest } from '../../store/album.actions';
 
 @Component({
   selector: 'app-edit-tracks',
@@ -23,6 +24,7 @@ export class EditTracksComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(fetchAlbumsRequest({id: ''}));
   }
 
   onSubmit() {

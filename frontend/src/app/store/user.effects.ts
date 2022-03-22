@@ -12,11 +12,9 @@ import {
   registerUserRequest,
   registerUserSuccess
 } from './user.actions';
-import { mergeMap, NEVER, tap, withLatestFrom } from 'rxjs';
+import { mergeMap, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HelpersService } from '../services/helpers.service';
-import { AppState } from './types';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 
@@ -27,7 +25,7 @@ export class UsersEffects {
     private usersService: UsersService,
     private router: Router,
     private helpers: HelpersService,
-    private store: Store<AppState>
+
   ) {
   }
 
@@ -57,16 +55,17 @@ export class UsersEffects {
 
   logoutUser = createEffect(() => this.actions.pipe(
     ofType(logoutUserRequest),
-    withLatestFrom(this.store.select(state => state.users.user)),
-    mergeMap(([_, user]) => {
-      if (user) {
-        return this.usersService.logout(user.token).pipe(
-          map(() => logoutUser()),
-          tap(() => this.helpers.openSnackbar('Logout successful'))
-        )
-      }
+    mergeMap(() => {
+      return this.usersService.logout().pipe(
+        map(() => logoutUser()),
+        tap(() => {
 
-      return NEVER;
+          void this.router.navigate(['/']);
+          this.helpers.openSnackbar('Logout successful')
+        })
+      );
     })
-  ))
+  ));
+
+
 }

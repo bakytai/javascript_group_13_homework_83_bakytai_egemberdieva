@@ -9,6 +9,12 @@ export class TrackModel {
   ) {}
 }
 
+export interface TrackData {
+  album: string,
+  trackName: string,
+  duration: string
+}
+
 export interface ApiTrackData {
   _id: string,
   album: Album,

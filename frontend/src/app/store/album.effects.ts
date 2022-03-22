@@ -12,6 +12,7 @@ import {
   fetchAlbumsRequest,
   fetchAlbumsSuccess
 } from './album.actions';
+import { HelpersService } from '../services/helpers.service';
 
 @Injectable()
 
@@ -28,7 +29,10 @@ export class AlbumsEffects {
     ofType(createAlbumRequest),
     mergeMap(({albumData}) => this.albumService.createAlbum(albumData).pipe(
       map(() => createAlbumSuccess()),
-      tap(() => this.router.navigate(['/'])),
+      tap(() => {
+        this.router.navigate(['/']);
+        this.helpers.openSnackbar('Album saved!');
+      }),
       catchError(() => of(createAlbumFailure({error: 'Wrong Data'})))
     ))
   ));
@@ -37,6 +41,7 @@ export class AlbumsEffects {
   constructor(
     private router: Router,
     private actions: Actions,
-    private albumService: AlbumsService
+    private albumService: AlbumsService,
+    private helpers: HelpersService
   ) {}
 }

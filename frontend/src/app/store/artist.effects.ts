@@ -11,6 +11,7 @@ import {
   fetchArtistRequest,
   fetchArtistSuccess
 } from './artist.actions';
+import { HelpersService } from '../services/helpers.service';
 
 @Injectable()
 
@@ -27,7 +28,10 @@ export class ArtistsEffects {
     ofType(createArtistRequest),
     mergeMap(({artistData}) => this.artistsService.createArtist(artistData).pipe(
       map(() => createArtistSuccess()),
-      tap(() => this.router.navigate(['/'])),
+      tap(() => {
+        this.router.navigate(['/']);
+        this.helpers.openSnackbar('Artist saved!');
+      }),
       catchError(() => of(createArtistFailure({error: 'Wrong Data'})))
     ))
   ));
@@ -35,6 +39,7 @@ export class ArtistsEffects {
   constructor(
     private router: Router,
     private actions: Actions,
-    private artistsService: ArtistsService
+    private artistsService: ArtistsService,
+    private helpers: HelpersService
   ) {}
 }

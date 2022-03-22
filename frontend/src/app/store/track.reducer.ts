@@ -1,6 +1,13 @@
 import { TrackState } from './types';
 import { createReducer, on } from '@ngrx/store';
-import { fetchTrackFailure, fetchTrackRequest, fetchTrackSuccess } from './track.actions';
+import {
+  createTrackFailure,
+  createTrackRequest,
+  createTrackSuccess,
+  fetchTrackFailure,
+  fetchTrackRequest,
+  fetchTrackSuccess
+} from './track.actions';
 
 export const initialState: TrackState = {
   tracks: [],
@@ -16,5 +23,11 @@ export const tracksReducer = createReducer(
     ...state,
     fetchLoading: false,
     fetchError: error
-  }))
+  })),
+  on(createTrackRequest, state => ({...state, createLoading: true})),
+  on(createTrackSuccess, state => ({...state, createLoading: false})),
+  on(createTrackFailure, (state, {error}) => ({
+    ...state,
+    createLoading: false,
+    createError: error})),
 )
