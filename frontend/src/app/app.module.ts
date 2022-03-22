@@ -12,7 +12,7 @@ import { ArtistsComponent } from './artists/artists.component';
 import { ArtistsAlbumsComponent } from './artists-albums/artists-albums.component';
 import { FlexModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ImagePipe } from './pipe/image.pipe';
 import { RegisterComponent } from './pages/register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,6 +34,7 @@ import { EditTracksComponent } from './tracks/edit-tracks/edit-tracks.component'
 import { EditAlbumsComponent } from './artists-albums/edit-albums/edit-albums.component';
 import { EditArtistsComponent } from './artists/edit-artists/edit-artists.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,9 @@ import { MatSelectModule } from '@angular/material/select';
     AppStoreModule,
     MatSelectModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
