@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { NgForm } from '@angular/forms';
+import { ArtistData } from '../../models/artist.model';
+import { createArtistRequest } from '../../store/artist.actions';
 
 @Component({
   selector: 'app-edit-artists',
@@ -23,6 +25,7 @@ export class EditArtistsComponent implements OnInit {
   }
 
   onSubmit() {
-
+    const artistData: ArtistData = this.form.value;
+    this.store.dispatch(createArtistRequest({artistData}))
   }
 }

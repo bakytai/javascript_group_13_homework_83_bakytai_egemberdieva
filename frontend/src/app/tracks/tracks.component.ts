@@ -22,6 +22,7 @@ export class TracksComponent implements OnInit {
   loading: Observable<boolean>;
   error: Observable<null | string>;
   token!: string;
+  albumId!: string;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private helpers: HelpersService) {
     this.tracks = store.select(state => state.tracks.tracks);
@@ -31,11 +32,10 @@ export class TracksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let id = ''
     this.route.params.subscribe(params => {
-      id = params['id']
+      this.albumId = params['id']
     })
-    this.store.dispatch(fetchTrackRequest({id: id}));
+    this.store.dispatch(fetchTrackRequest({id: this.albumId}));
 
     this.user.subscribe(user => {
       if (user) {
@@ -57,10 +57,12 @@ export class TracksComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.store.dispatch(deleteTrackRequest({id}));
+    const albumId = this.albumId;
+    this.store.dispatch(deleteTrackRequest({id,albumId}));
   }
 
   publish(id: string) {
-    this.store.dispatch(publishTrackRequest({id}));
+    const albumId = this.albumId;
+    this.store.dispatch(publishTrackRequest({id, albumId}));
   }
 }

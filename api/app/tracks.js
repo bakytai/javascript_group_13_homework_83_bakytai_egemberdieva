@@ -51,9 +51,8 @@ router.post('/',  auth, async (req, res, next) => {
 router.delete('/:id', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
-            await Track.deleteOne({_id: req.params.id});
-            const tracks = await Track.find();
-            return res.send(tracks);
+             await Track.deleteOne({_id: req.params.id});
+            return res.send({message: 'Deleted track!'});
         }
 
         return res.send({message: 'You cannot delete!'});
@@ -66,10 +65,10 @@ router.post('/:id/publish', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
             const isPublishTrack = await Track.findById(req.params.id);
-            isPublishTrack.is_publish = true;
+            isPublishTrack.is_published = true;
             isPublishTrack.save();
-            const tracks = await Track.find();
-            return res.send(tracks);
+
+            return res.send({message: 'Track published!'});
         }
 
         return res.send({message: 'You cannot modify!'});

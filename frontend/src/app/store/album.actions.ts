@@ -28,11 +28,10 @@ export const createAlbumFailure = createAction(
 
 export const deleteAlbumRequest = createAction(
   '[Albums] Delete Request',
-  props<{id: string}>()
+  props<{id: string, artistId: string}>()
 );
 export const deleteAlbumSuccess = createAction(
-  '[Albums] Delete Success',
-  props<{albums: Album[]}>()
+  '[Albums] Delete Success'
 );
 export const deleteAlbumFailure = createAction(
   '[Albums] Delete Failure',
@@ -41,11 +40,10 @@ export const deleteAlbumFailure = createAction(
 
 export const publishAlbumsRequest = createAction(
   '[Albums] Publish Request',
-  props<{id: string}>()
+  props<{id: string, artistId: string}>()
 );
 export const publishAlbumsSuccess = createAction(
-  '[Albums] Publish Success',
-  props<{albums: Album[]}>()
+  '[Albums] Publish Success'
 );
 export const publishAlbumsFailure = createAction(
   '[Albums] Publish Failure',

@@ -19,6 +19,8 @@ import {
   publishTrackSuccess
 } from './track.actions';
 import { HelpersService } from '../services/helpers.service';
+import { AppState } from './types';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 
@@ -27,7 +29,8 @@ export class TracksEffects {
     private router: Router,
     private actions: Actions,
     private trackService: TracksService,
-    private helpers: HelpersService
+    private helpers: HelpersService,
+    private store: Store<AppState>
   ) {}
 
   fetchTracks = createEffect(() => this.actions.pipe(
@@ -52,9 +55,10 @@ export class TracksEffects {
 
   deleteTrack = createEffect(() => this.actions.pipe(
     ofType(deleteTrackRequest),
-    mergeMap(({id}) => this.trackService.deleteTrack(id).pipe(
-      map(tracks => deleteTrackSuccess({tracks})),
+    mergeMap(({id, albumId}) => this.trackService.deleteTrack(id).pipe(
+      map(() => deleteTrackSuccess()),
       tap(() => {
+        this.store.dispatch(fetchTrackRequest({id: albumId}))
         this.helpers.openSnackbar('Track deleted!');
       }),
       catchError(() => of(deleteTrackFailure({error: 'Wrong Data'})))
@@ -63,9 +67,10 @@ export class TracksEffects {
 
   publishTrack = createEffect(() => this.actions.pipe(
     ofType(publishTrackRequest),
-    mergeMap(({id}) => this.trackService.getPublish(id).pipe(
-      map(tracks => publishTrackSuccess({tracks})),
+    mergeMap(({id, albumId}) => this.trackService.getPublish(id).pipe(
+      map(() => publishTrackSuccess()),
       tap(() => {
+        this.store.dispatch(fetchTrackRequest({id: albumId}))
         this.helpers.openSnackbar('Tracks published!');
       }),
       catchError(() => of(publishTrackFailure({error: 'Wrong Data'})))

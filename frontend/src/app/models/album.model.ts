@@ -25,5 +25,5 @@ export interface ApiAlbumData {
   year: string,
   artist: Artist,
   image: string,
-  is_publish: boolean
+  is_published: boolean
 }

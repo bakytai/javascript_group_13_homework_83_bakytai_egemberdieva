@@ -19,6 +19,8 @@ import {
   publishArtistSuccess
 } from './artist.actions';
 import { HelpersService } from '../services/helpers.service';
+import { Store } from '@ngrx/store';
+import { AppState } from './types';
 
 @Injectable()
 
@@ -46,8 +48,9 @@ export class ArtistsEffects {
   deleteArtist = createEffect(() => this.actions.pipe(
     ofType(deleteArtistRequest),
     mergeMap(({id}) => this.artistsService.deleteArtist(id).pipe(
-      map(artists => deleteArtistSuccess({artists})),
+      map(() => deleteArtistSuccess()),
       tap(() => {
+        this.store.dispatch(fetchArtistRequest());
         this.helpers.openSnackbar('Artist deleted!');
       }),
       catchError(() => of(deleteArtistFailure({error: 'Wrong Data'})))
@@ -57,8 +60,9 @@ export class ArtistsEffects {
  publishArtist = createEffect(() => this.actions.pipe(
     ofType(publishArtistRequest),
     mergeMap(({id}) => this.artistsService.getPublish(id).pipe(
-      map(artists => publishArtistSuccess({artists})),
+      map(() => publishArtistSuccess()),
       tap(() => {
+        this.store.dispatch(fetchArtistRequest());
         this.helpers.openSnackbar('Artist published!');
       }),
       catchError(() => of(publishArtistFailure({error: 'Wrong Data'})))
@@ -69,6 +73,7 @@ export class ArtistsEffects {
     private router: Router,
     private actions: Actions,
     private artistsService: ArtistsService,
-    private helpers: HelpersService
+    private helpers: HelpersService,
+    private store: Store<AppState>
   ) {}
 }

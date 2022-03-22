@@ -12,9 +12,10 @@ import { deleteAlbumRequest, fetchAlbumsRequest, publishAlbumsRequest } from '..
   styleUrls: ['./artists-albums.component.sass']
 })
 export class ArtistsAlbumsComponent implements OnInit {
-  albums: Observable<Album[]>
-  loading: Observable<boolean>
-  error: Observable<null | string>
+  albums: Observable<Album[]>;
+  loading: Observable<boolean>;
+  error: Observable<null | string>;
+  artistId!: string;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.albums = store.select(state => state.albums.albums);
@@ -23,18 +24,18 @@ export class ArtistsAlbumsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let id = ''
     this.route.params.subscribe(params => {
-      id = params['id']
+      this.artistId = params['id']
     })
-    this.store.dispatch(fetchAlbumsRequest({id: id}));
+    this.store.dispatch(fetchAlbumsRequest({id: this.artistId}));
   }
 
   delete(id: string) {
-    this.store.dispatch(deleteAlbumRequest({id}));
-  }
+    const artistId = this.artistId;
+    this.store.dispatch(deleteAlbumRequest({id, artistId}));}
 
   publish(id: string) {
-    this.store.dispatch(publishAlbumsRequest({id}));
+    const artistId = this.artistId;
+    this.store.dispatch(publishAlbumsRequest({id, artistId}));
   }
 }

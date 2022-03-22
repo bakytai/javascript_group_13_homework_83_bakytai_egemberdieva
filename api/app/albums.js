@@ -88,8 +88,7 @@ router.delete('/:id', auth, async (req,res,next) => {
         if (req.user.role === 'admin') {
             await Album.deleteOne({_id: req.params.id});
             await Track.deleteMany({album: req.params.id});
-            const albums = await Album.find();
-            return res.send(albums);
+            return res.send({message: 'Deleted album!'});
         }
 
         return res.send({message: 'You cannot delete!'});
@@ -102,10 +101,9 @@ router.post('/:id/publish', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
             const isPublishAlbum = await Album.findById(req.params.id);
-            isPublishAlbum.is_publish = true;
+            isPublishAlbum.is_published = true;
             isPublishAlbum.save();
-            const albums = await Album.find();
-            return res.send(albums);
+            return res.send({message: 'Published album!'});
         }
         return res.send({message: 'You cannot modify!'});
 

@@ -15,21 +15,15 @@ export class AlbumsService {
     return this.http.get<ApiAlbumData[]>(environment.apiUrl + '/albums?artist=' + artistId).pipe(
       map(response => {
         return response.map(albumData => {
-          return new Album(albumData._id, albumData.title, albumData.year, albumData.artist, albumData.image, albumData.is_publish);
+          return new Album(albumData._id, albumData.title, albumData.year, albumData.artist,
+            albumData.image, albumData.is_published);
         });
       })
     );
   };
 
   getPublish(id: string) {
-    return this.http.post<ApiAlbumData[]>(environment.apiUrl + `/albums/${id}/publish`, {is_publish: true}).pipe(
-      map(response => {
-        return response.map(albumData => {
-          return new Album(albumData._id, albumData.title, albumData.year, albumData.artist,
-            albumData.image, albumData.is_publish);
-        });
-      })
-    );
+    return this.http.post(environment.apiUrl + `/albums/${id}/publish`, {is_publish: true});
   }
 
   createAlbum(album: AlbumData) {
@@ -45,12 +39,6 @@ export class AlbumsService {
   };
 
   deleteAlbum(id: string) {
-    return this.http.delete<ApiAlbumData[]>(environment.apiUrl + '/albums/' + id).pipe(
-      map(response => {
-        return response.map(albumData => {
-          return new Album(albumData._id, albumData.title, albumData.year, albumData.artist, albumData.image, albumData.is_publish);
-        });
-      })
-    );
+    return this.http.delete(environment.apiUrl + '/albums/' + id);
   }
 }

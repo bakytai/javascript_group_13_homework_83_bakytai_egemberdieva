@@ -38,7 +38,7 @@ export const tracksReducer = createReducer(
   })),
 
   on(publishTrackRequest, state => ({...state, changeLoading: true})),
-  on(publishTrackSuccess, (state, {tracks}) => ({...state, changeLoading: false, tracks})),
+  on(publishTrackSuccess, state => ({...state, changeLoading: false})),
   on(publishTrackFailure, (state, {error}) => ({
     ...state,
     changeLoading: false,

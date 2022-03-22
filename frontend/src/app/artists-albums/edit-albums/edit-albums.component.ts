@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Artist } from '../../models/artist.model';
 import { fetchArtistRequest } from '../../store/artist.actions';
+import { createAlbumRequest } from '../../store/album.actions';
+import { AlbumData } from '../../models/album.model';
 
 @Component({
   selector: 'app-edit-albums',
@@ -28,6 +30,7 @@ export class EditAlbumsComponent implements OnInit {
   }
 
   onSubmit() {
-
+    const albumData: AlbumData = this.form.value;
+    this.store.dispatch(createAlbumRequest({albumData}))
   }
 }

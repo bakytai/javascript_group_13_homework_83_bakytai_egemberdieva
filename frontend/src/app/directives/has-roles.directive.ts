@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
 export class HasRolesDirective implements OnInit, OnDestroy{
   userSub!: Subscription;
   user: Observable<null | User>;
-  @Input('appHasRoles') roles!: string[];
+  @Input('appHasRoles') roles!: {role: string[], published: boolean};
   @Input('appHasRolesElse') elseTemplate?: TemplateRef<any>;
 
   constructor(
@@ -24,10 +24,10 @@ export class HasRolesDirective implements OnInit, OnDestroy{
     this.userSub = this.user.subscribe(user => {
       this.viewContainer.clear();
 
-      if (user && this.roles.includes(user.role)) {
+      if(user?.role === 'admin'){
         this.viewContainer.createEmbeddedView(this.templateRef);
-      } else if (this.elseTemplate) {
-        this.viewContainer.createEmbeddedView(this.elseTemplate);
+      } else if((user?.role === 'user' && this.roles.published === true) || (!user && this.roles.published === true)){
+        this.viewContainer.createEmbeddedView(this.templateRef);
       }
     });
   }

@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Album } from '../../models/album.model';
 import { fetchAlbumsRequest } from '../../store/album.actions';
+import { ArtistData } from '../../models/artist.model';
+import { createArtistRequest } from '../../store/artist.actions';
 
 @Component({
   selector: 'app-edit-tracks',
@@ -28,6 +30,7 @@ export class EditTracksComponent implements OnInit {
   }
 
   onSubmit() {
-
+    const artistData: ArtistData = this.form.value;
+    this.store.dispatch(createArtistRequest({artistData}))
   }
 }

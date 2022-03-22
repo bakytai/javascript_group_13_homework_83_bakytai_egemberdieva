@@ -19,6 +19,8 @@ import {
   publishAlbumsSuccess
 } from './album.actions';
 import { HelpersService } from '../services/helpers.service';
+import { Store } from '@ngrx/store';
+import { AppState } from './types';
 
 @Injectable()
 
@@ -45,9 +47,10 @@ export class AlbumsEffects {
 
   deleteAlbum = createEffect(() => this.actions.pipe(
     ofType(deleteAlbumRequest),
-    mergeMap(({id}) => this.albumService.deleteAlbum(id).pipe(
-      map(albums => deleteAlbumSuccess({albums})),
+    mergeMap(({id, artistId}) => this.albumService.deleteAlbum(id).pipe(
+      map(() => deleteAlbumSuccess()),
       tap(() => {
+        this.store.dispatch(fetchAlbumsRequest({id: artistId}));
         this.helpers.openSnackbar('Album deleted!');
       }),
       catchError(() => of(deleteAlbumFailure({error: 'Wrong Data'})))
@@ -56,10 +59,11 @@ export class AlbumsEffects {
 
   publishAlbum = createEffect(() => this.actions.pipe(
     ofType(publishAlbumsRequest),
-    mergeMap(({id}) => this.albumService.getPublish(id).pipe(
-      map(albums => publishAlbumsSuccess({albums})),
+    mergeMap(({id, artistId}) => this.albumService.getPublish(id).pipe(
+      map(() => publishAlbumsSuccess()),
       tap(() => {
-        this.helpers.openSnackbar('Artist published!');
+        this.store.dispatch(fetchAlbumsRequest({id: artistId}));
+        this.helpers.openSnackbar('Album published!');
       }),
       catchError(() => of(publishAlbumsFailure({error: 'Wrong Data'})))
     ))
@@ -69,6 +73,7 @@ export class AlbumsEffects {
     private router: Router,
     private actions: Actions,
     private albumService: AlbumsService,
-    private helpers: HelpersService
+    private helpers: HelpersService,
+    private store: Store<AppState>
   ) {}
 }

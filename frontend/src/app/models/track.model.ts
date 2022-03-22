@@ -21,5 +21,5 @@ export interface ApiTrackData {
   album: Album,
   trackName: string,
   duration: string,
-  is_publish: boolean
+  is_published: boolean
 }

@@ -1,23 +1,25 @@
 <div fxLayout="row" style="padding: 20px" >
-  <mat-card  *ngFor="let album of albums | async" class="example-card" style="width: 14rem; margin: 5px"
-             [routerLink]="['/tracks/',album.id]">
-    <mat-card-header>
-      <div *appHasRoles="['admin']">
-        <mat-card-subtitle  *appPublish="{roles: ['admin'], ispl: album.is_publish}">Unpublished</mat-card-subtitle>
+  <div *ngFor="let album of albums | async" class="example-card" style="width: 14rem; margin: 5px"
+       [routerLink]="['/tracks/',album.id]">
+    <mat-card  *appHasRoles="{role: ['admin', 'user'], published: album.is_publish}">
+      <mat-card-header>
+        <div>
+          <mat-card-subtitle *ngIf="!album.is_publish">Unpublished</mat-card-subtitle>
+        </div>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ album.title }}</mat-card-title>
+        <mat-card-subtitle><b>Artist name: </b>{{ album.artist.name }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-xl-image [src]="album.image | image" [alt]="'Photo of ' + album.title">
+      <mat-card-content>
+        <mat-card-subtitle style="font-size: 15px">Release date:  {{ album.year }}</mat-card-subtitle>
+      </mat-card-content>
+      <div *appHasRoles="{role: ['admin', 'user'], published: album.is_publish}">
+        <button mat-raised-button (click)="delete(album.id)">Delete</button>
+        <div *ngIf="!album.is_publish">
+          <button mat-raised-button (click)="publish(album.id)">Publish</button>
+        </div>
       </div>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{ album.title }}</mat-card-title>
-      <mat-card-subtitle><b>Artist name: </b>{{ album.artist.name }}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-xl-image [src]="album.image | image" [alt]="'Photo of ' + album.title">
-    <mat-card-content>
-      <mat-card-subtitle style="font-size: 15px">Release date:  {{ album.year }}</mat-card-subtitle>
-    </mat-card-content>
-    <div *appHasRoles="['admin']">
-      <button mat-raised-button (click)="delete(album.id)">Delete</button>
-      <div *appPublish="{roles: ['admin'], ispl: album.is_publish}">
-        <button mat-raised-button (click)="publish(album.id)">Publish</button>
-      </div>
-    </div>
-  </mat-card>
+    </mat-card>
+  </div>
 </div>

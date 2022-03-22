@@ -66,10 +66,9 @@ router.post('/:id/publish', auth, async (req,res,next) => {
     try {
         if (req.user.role === 'admin') {
             const isPublishArtist = await Artist.findById(req.params.id);
-            isPublishArtist.is_publish = true;
+            isPublishArtist.is_published = true;
             isPublishArtist.save();
-            const artists = await Artist.find();
-            return res.send(artists);
+            return res.send({message: 'Artist published!'});
         }
 
         return res.send({message: 'You cannot modify!'});
@@ -86,8 +85,8 @@ router.delete('/:id', auth, async (req,res,next) => {
             await Artist.deleteOne({_id: req.params.id});
             await Album.deleteMany({album: req.params.id});
             await Track.deleteMany({album: {$in: albums}});
-            const artists = await Artist.find();
-            return res.send(artists);
+
+            return res.send({message: 'Deleted artist'});
         }
 
         return res.send({message: 'You cannot delete!'});

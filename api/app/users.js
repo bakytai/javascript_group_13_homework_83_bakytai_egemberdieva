@@ -37,6 +37,8 @@ router.post('/', upload.single('avatar'),async (req, res, next) => {
         }
 
         const user = new User(userData);
+        user.generateToken();
+
 
         await user.save();
 

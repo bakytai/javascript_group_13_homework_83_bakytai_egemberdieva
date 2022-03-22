@@ -33,7 +33,7 @@ export const artistsReducer = createReducer(
   })),
 
   on(publishArtistRequest, state => ({...state, changeLoading: true})),
-  on(publishArtistSuccess, (state, {artists}) => ({...state, changeLoading: false, artists})),
+  on(publishArtistSuccess, state => ({...state, changeLoading: false})),
   on(publishArtistFailure, (state, {error}) => ({
     ...state,
     changeLoading: false,
