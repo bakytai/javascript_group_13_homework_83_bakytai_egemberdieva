@@ -1,1 +1,34 @@
-<p>edit-tracks works!</p>
+<h1>New track</h1>
+<mat-card>
+  <mat-card-content>
+    <div class="error" *ngIf="error | async">
+      {{ error | async }}
+    </div>
+    <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+      <mat-form-field appearance="outline">
+        <mat-label>Album</mat-label>
+        <mat-select name="album" required ngModel>
+          <mat-option *ngFor="let album of albums | async" [value]="album.id">
+            {{ album.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Track Name</mat-label>
+        <input name="trackName" required matInput ngModel/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Duration: </mat-label>
+        <input name="duration" required matInput ngModel/>
+      </mat-form-field>
+      <div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="f.invalid || (loading | async)"
+        >ADD</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
