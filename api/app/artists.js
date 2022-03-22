@@ -67,6 +67,7 @@ router.post('/:id/publish', auth, async (req,res,next) => {
         if (req.user.role === 'admin') {
             const isPublishArtist = await Artist.findById(req.params.id);
             isPublishArtist.is_publish = true;
+            isPublishArtist.save();
             const artists = await Artist.find();
             return res.send(artists);
         }

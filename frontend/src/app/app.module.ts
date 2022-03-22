@@ -37,6 +37,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AuthInterceptor } from './auth.interceptor';
 import { HasRolesDirective } from './directives/has-roles.directive';
 import { UserTypeDirective } from './directives/user-type.directive';
+import { PublishDirective } from './directives/publish.directive';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { UserTypeDirective } from './directives/user-type.directive';
     EditArtistsComponent,
     HasRolesDirective,
     UserTypeDirective,
+    PublishDirective
   ],
   imports: [
     BrowserModule,

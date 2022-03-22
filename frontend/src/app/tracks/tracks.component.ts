@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { fetchTrackRequest } from '../store/track.actions';
+import { deleteTrackRequest, fetchTrackRequest, publishTrackRequest } from '../store/track.actions';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
@@ -54,5 +54,13 @@ export class TracksComponent implements OnInit {
     } else {
       this.helpers.openSnackbar('Log in to your account!');
     }
+  }
+
+  delete(id: string) {
+    this.store.dispatch(deleteTrackRequest({id}));
+  }
+
+  publish(id: string) {
+    this.store.dispatch(publishTrackRequest({id}));
   }
 }

@@ -103,6 +103,7 @@ router.post('/:id/publish', auth, async (req,res,next) => {
         if (req.user.role === 'admin') {
             const isPublishAlbum = await Album.findById(req.params.id);
             isPublishAlbum.is_publish = true;
+            isPublishAlbum.save();
             const albums = await Album.find();
             return res.send(albums);
         }

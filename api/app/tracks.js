@@ -67,6 +67,7 @@ router.post('/:id/publish', auth, async (req,res,next) => {
         if (req.user.role === 'admin') {
             const isPublishTrack = await Track.findById(req.params.id);
             isPublishTrack.is_publish = true;
+            isPublishTrack.save();
             const tracks = await Track.find();
             return res.send(tracks);
         }

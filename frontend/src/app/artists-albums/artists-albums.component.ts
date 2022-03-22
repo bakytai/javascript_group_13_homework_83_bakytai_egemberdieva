@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
 import { Album } from '../models/album.model';
-import { fetchAlbumsRequest } from '../store/album.actions';
+import { deleteAlbumRequest, fetchAlbumsRequest, publishAlbumsRequest } from '../store/album.actions';
 
 @Component({
   selector: 'app-artists-albums',
@@ -30,4 +30,11 @@ export class ArtistsAlbumsComponent implements OnInit {
     this.store.dispatch(fetchAlbumsRequest({id: id}));
   }
 
+  delete(id: string) {
+    this.store.dispatch(deleteAlbumRequest({id}));
+  }
+
+  publish(id: string) {
+    this.store.dispatch(publishAlbumsRequest({id}));
+  }
 }

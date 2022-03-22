@@ -2,6 +2,9 @@
   <mat-card  *ngFor="let album of albums | async" class="example-card" style="width: 14rem; margin: 5px"
              [routerLink]="['/tracks/',album.id]">
     <mat-card-header>
+      <div *appHasRoles="['admin']">
+        <mat-card-subtitle  *appPublish="album.is_publish">Unpublished</mat-card-subtitle>
+      </div>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{ album.title }}</mat-card-title>
       <mat-card-subtitle><b>Artist name: </b>{{ album.artist.name }}</mat-card-subtitle>
@@ -10,5 +13,11 @@
     <mat-card-content>
       <mat-card-subtitle style="font-size: 15px">Release date:  {{ album.year }}</mat-card-subtitle>
     </mat-card-content>
+    <div *appHasRoles="['admin']">
+      <button mat-raised-button (click)="delete(album.id)">Delete</button>
+      <div *appPublish="album.is_publish">
+        <button mat-raised-button (click)="publish(album.id)">Publish</button>
+      </div>
+    </div>
   </mat-card>
 </div>

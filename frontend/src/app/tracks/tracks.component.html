@@ -1,5 +1,8 @@
 <div *ngFor="let track of tracks | async"
      fxLayout="row" fxLayoutAlign="space-between" style="margin: 10px; width: 50rem;">
+  <div *appHasRoles="['admin']">
+    <mat-card-subtitle  *appPublish="track.is_publish">Unpublished</mat-card-subtitle>
+  </div>
       <div>
         {{ track.trackName}}
       </div>
@@ -13,4 +16,10 @@
           To listen
         </a>
       </div>
+  <div *appHasRoles="['admin']">
+    <button mat-raised-button (click)="delete(track.id)">Delete</button>
+    <div *appPublish="track.is_publish">
+      <button mat-raised-button (click)="publish(track.id)">Publish</button>
+    </div>
+  </div>
 </div>
