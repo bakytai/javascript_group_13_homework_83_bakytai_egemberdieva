@@ -1,0 +1,30 @@
+<h1>New artist</h1>
+<mat-card>
+  <mat-card-content>
+    <div class="error" *ngIf="error | async">
+      {{ error | async }}
+    </div>
+    <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+      <mat-form-field appearance="outline">
+        <mat-label>Artist Name</mat-label>
+        <input name="name" required matInput ngModel/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Information about artist</mat-label>
+        <textarea name="information" ngModel matInput cdkTextareaAutosize cdkAutosizeMinRows="3"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <app-file-input name="image" ngModel></app-file-input>
+      </mat-form-field>
+      <div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="f.invalid || (loading | async)"
+        >ADD</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

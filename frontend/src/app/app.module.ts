@@ -30,6 +30,10 @@ import { TracksComponent } from './tracks/tracks.component';
 import { MatListModule } from '@angular/material/list';
 import { TrackHistoryComponent } from './track-history/track-history.component';
 import { AppStoreModule } from './app-store.module';
+import { EditTracksComponent } from './tracks/edit-tracks/edit-tracks.component';
+import { EditAlbumsComponent } from './artists-albums/edit-albums/edit-albums.component';
+import { EditArtistsComponent } from './artists/edit-artists/edit-artists.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,10 @@ import { AppStoreModule } from './app-store.module';
     LoginComponent,
     CenteredCardComponent,
     TracksComponent,
-    TrackHistoryComponent
+    TrackHistoryComponent,
+    EditTracksComponent,
+    EditAlbumsComponent,
+    EditArtistsComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +71,8 @@ import { AppStoreModule } from './app-store.module';
     MatSidenavModule,
     MatMenuModule,
     MatListModule,
-    AppStoreModule
+    AppStoreModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

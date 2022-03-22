@@ -6,6 +6,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './login/login.component';
 import { TracksComponent } from './tracks/tracks.component';
 import { TrackHistoryComponent } from './track-history/track-history.component';
+import { EditArtistsComponent } from './artists/edit-artists/edit-artists.component';
+import { EditAlbumsComponent } from './artists-albums/edit-albums/edit-albums.component';
+import { EditTracksComponent } from './tracks/edit-tracks/edit-tracks.component';
 
 const routes: Routes = [
   {path: '', component: ArtistsComponent},
@@ -13,7 +16,10 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'tracks/:id', component: TracksComponent},
-  {path: 'trackHistory', component: TrackHistoryComponent}
+  {path: 'trackHistory', component: TrackHistoryComponent},
+  {path: 'new/artist', component: EditArtistsComponent},
+  {path: 'new/album', component: EditAlbumsComponent},
+  {path: 'new/track', component: EditTracksComponent},
 ];
 
 @NgModule({

@@ -5,7 +5,7 @@ const { nanoid } = require('nanoid');
 const config = require('../config');
 const Album = require("../models/Album");
 const auth = require("../middleware/auth");
-const permit = require("../middleware/permit");
+
 
 const router = express.Router();
 
@@ -50,7 +50,7 @@ router.get('/:id', async ( req, res, next) => {
     }
 });
 
-router.post('/', auth, permit('admin'), upload.single('image'), async (req, res, next) => {
+router.post('/', auth, upload.single('image'), async (req, res, next) => {
     try {
         if (!req.body.title || !req.body.year || !req.body.artist) {
             return res.status(400).send({message: 'Title or year, or arist are required'});
@@ -61,10 +61,15 @@ router.post('/', auth, permit('admin'), upload.single('image'), async (req, res,
             title: req.body.title,
             year: req.body.year,
             image: null,
+            is_published: false
         };
 
         if (req.file) {
             albumData.image = req.file.filename;
+        }
+
+        if(req.user.role === 'admin') {
+            albumData.is_published = true
         }
 
         const album = new Album(albumData);
@@ -72,6 +77,16 @@ router.post('/', auth, permit('admin'), upload.single('image'), async (req, res,
         await album.save();
 
         return res.send({message: 'Created new album', id: album._id});
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.delete('/:id', auth, async (req,res,next) => {
+    try {
+        if (req.user.role === 'admin') {
+
+        }
     } catch (e) {
         next(e);
     }

@@ -18,9 +18,7 @@ router.post('/', auth, async (req, res, next) => {
 
         trackHistory.save();
 
-
         return res.send(trackHistory)
-
     } catch (e) {
         next(e)
     }
@@ -35,7 +33,7 @@ router.get('/', auth, async (req, res, next) => {
             query.user = req.user._id;
         }
 
-        const trackHistory = await TrackHistory.find(query).sort({_id:-1}).populate({
+        const trackHistory = await TrackHistory.find(query).sort({_id: -1}).populate({
             path:  "track"  ,
             select: 'trackName',
             populate: {

@@ -5,7 +5,6 @@ const config = require("../config");
 const {nanoid} = require("nanoid");
 const path = require("path");
 const auth = require("../middleware/auth");
-const permit = require("../middleware/permit");
 
 const router = express.Router();
 
@@ -29,7 +28,7 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-router.post('/', auth, permit('admin'), upload.single('image'), async (req, res, next) => {
+router.post('/', auth, upload.single('image'), async (req, res, next) => {
     try {
         if (!req.body.name) {
             return res.status(400).send({message: 'name are required'});
@@ -39,10 +38,15 @@ router.post('/', auth, permit('admin'), upload.single('image'), async (req, res,
             name: req.body.name,
             information: req.body.information,
             image: null,
+            is_published: false
         };
 
         if (req.file) {
             artistData.image = req.file.filename;
+        }
+
+        if(req.user.role === 'admin') {
+            artistData.is_published = true
         }
 
         const artist = new Artist(artistData);
@@ -50,6 +54,16 @@ router.post('/', auth, permit('admin'), upload.single('image'), async (req, res,
         await artist.save();
 
         return res.send({message: 'Created new artist', id: artist._id});
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.delete('/:id', auth, async (req,res,next) => {
+    try {
+        if (req.user.role === 'admin') {
+
+        }
     } catch (e) {
         next(e);
     }

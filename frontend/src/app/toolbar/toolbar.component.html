@@ -20,7 +20,13 @@
 </mat-sidenav-container>
 
 <ng-template #userMenu>
-  <nav>
+  <nav fxLayout="row" fxLayoutAlign="space-between">
+    <div >
+      <a mat-button routerLink="/new/artist">Add Artist</a>
+      <a mat-button routerLink="/new/album">Add Album</a>
+      <a mat-button routerLink="/new/track">Add track</a>
+    </div>
+
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>account_circle</mat-icon>
     </button>
