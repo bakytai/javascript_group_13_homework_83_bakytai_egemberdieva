@@ -11,7 +11,7 @@ export class PublishDirective implements OnInit, OnDestroy{
   userSub!: Subscription;
   user: Observable<null | User>;
   @Input('appPublish') publish!: boolean;
-  @Input('appPublish') elseTemplate?: TemplateRef<any>;
+  @Input('appPublishElse') elseTemplate?: TemplateRef<any>;
 
   constructor(
     private templateRef: TemplateRef<any>,
