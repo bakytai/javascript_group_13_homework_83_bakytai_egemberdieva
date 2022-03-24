@@ -8,8 +8,8 @@
         <mat-card-title>{{ artist.name }}</mat-card-title>
       </mat-card-header>
       <img mat-card-xl-image [src]="artist.image | image" [alt]="'Photo of ' + artist.name">
-      <div *appHasRoles="{role: ['admin', 'user'], published: artist.is_published}">
-        <button mat-raised-button (click)="delete(artist.id)">Delete</button>
+      <div >
+        <button *appHasRoles="{role: ['admin', 'user'], published: artist.is_published}" mat-raised-button (click)="delete(artist.id)">Delete</button>
         <div *ngIf="!artist.is_published">
           <button mat-raised-button (click)="publish(artist.id)">Publish</button>
         </div>

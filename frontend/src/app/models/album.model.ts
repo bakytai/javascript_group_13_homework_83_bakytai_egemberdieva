@@ -7,7 +7,7 @@ export class Album {
     public year: string,
     public artist: Artist,
     public image: string,
-    public is_publish: boolean
+    public is_published: boolean
   ) {}
 }
 

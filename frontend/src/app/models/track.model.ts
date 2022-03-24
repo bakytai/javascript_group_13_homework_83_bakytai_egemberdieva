@@ -6,7 +6,7 @@ export class TrackModel {
     public album: Album,
     public trackName: string,
     public duration: string,
-    public is_publish: boolean
+    public is_published: boolean
   ) {}
 }
 
