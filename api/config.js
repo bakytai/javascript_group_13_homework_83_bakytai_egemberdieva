@@ -8,5 +8,9 @@ module.exports = {
     mongo: {
         db: 'mongodb://localhost/musicApp',
         options: {useNewUrlParser: true},
+    },
+    facebook: {
+        appId: '1039803530252183',
+        appSecret: 'ebdfbf36531778d75ce42a20e4e96818'
     }
 };
