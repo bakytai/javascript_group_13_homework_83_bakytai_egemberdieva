@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { TrackHistory, TrackHistoryData } from '../models/trackHistory.model';
 
-export const fetchTrackHistoryRequest = createAction('[TracksHistory] Fetch Request',);
+export const fetchTrackHistoryRequest = createAction(
+  '[TracksHistory] Fetch Request',);
 export const fetchTrackHistorySuccess = createAction(
   '[TracksHistory] Fetch Success',
   props<{tracksHistory: TrackHistory[]}>()

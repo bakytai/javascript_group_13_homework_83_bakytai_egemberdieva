@@ -5,8 +5,8 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Album } from '../../models/album.model';
 import { fetchAlbumsRequest } from '../../store/album.actions';
-import { ArtistData } from '../../models/artist.model';
-import { createArtistRequest } from '../../store/artist.actions';
+import { TrackData } from '../../models/track.model';
+import { createTrackRequest } from '../../store/track.actions';
 
 @Component({
   selector: 'app-edit-tracks',
@@ -30,7 +30,7 @@ export class EditTracksComponent implements OnInit {
   }
 
   onSubmit() {
-    const artistData: ArtistData = this.form.value;
-    this.store.dispatch(createArtistRequest({artistData}))
+    const trackData: TrackData = this.form.value;
+    this.store.dispatch(createTrackRequest({trackData}));
   }
 }
