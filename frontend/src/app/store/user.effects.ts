@@ -3,6 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
 import {
+  loginFacebookFailure,
+  loginFacebookRequest, loginFacebookSuccess,
   loginUserFailure,
   loginUserRequest,
   loginUserSuccess,
@@ -50,6 +52,18 @@ export class UsersEffects {
         void this.router.navigate(['/']);
       }),
       this.helpers.catchServerError(loginUserFailure)
+    ))
+  ))
+
+  loginFacebook  = createEffect(() => this.actions.pipe(
+    ofType(loginFacebookRequest),
+    mergeMap(({userSocial}) => this.usersService.loginWithFacebook(userSocial).pipe(
+      map(user => loginFacebookSuccess({user})),
+      tap(() => {
+        this.helpers.openSnackbar('Login from facebook successful');
+        void this.router.navigate(['/']);
+      }),
+      this.helpers.catchServerError(loginFacebookFailure)
     ))
   ))
 
