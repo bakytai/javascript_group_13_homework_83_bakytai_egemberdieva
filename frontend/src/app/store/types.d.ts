@@ -54,6 +54,8 @@ export type UserState = {
   registerError: null | RegisterError,
   loginLoading: boolean,
   loginError: null | LoginError,
+  loginFacebookLoading: boolean,
+  loginFacebookError: null | LoginError
 }
 
 export type AppState = {

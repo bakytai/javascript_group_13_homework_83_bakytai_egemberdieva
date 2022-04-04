@@ -4,7 +4,7 @@ import { AppState } from '../store/types';
 import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { LoginError, LoginUserData } from '../models/user.model';
-import { loginUserRequest } from '../store/user.actions';
+import { loginFacebookRequest, loginUserRequest } from '../store/user.actions';
 import { FacebookLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 
 @Component({
@@ -24,10 +24,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authStateSub = this.auth.authState.subscribe((user: SocialUser) => {
-      console.log('Fb lgin succ!');
-      console.log(user);
-    })
+    this.authStateSub = this.auth.authState.subscribe((userSocial: SocialUser) => {
+      console.log('FB Login Successful!');
+      console.log(userSocial);
+        this.store.dispatch(loginFacebookRequest({userSocial}));
+    });
   }
 
   onSubmit() {
