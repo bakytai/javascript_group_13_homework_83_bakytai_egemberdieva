@@ -52,5 +52,16 @@
     <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">
       REGISTER
     </button>
+    <button
+      type="submit"
+      mat-raised-button
+      color="default"
+      (click)="fbLogin()"
+      style="margin-top: 16px"
+    >
+      <img src="assets/icons/icons8-facebook.svg" alt="facebook logo">
+      &nbsp;&nbsp;
+      SIGN IN WITH FACEBOOK
+    </button>
   </form>
 </app-centered-card>

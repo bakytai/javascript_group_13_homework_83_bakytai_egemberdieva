@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { RegisterError, RegisterUserData } from 'src/app/models/user.model';
 import { AppState } from 'src/app/store/types';
-import { registerUserRequest } from '../../store/user.actions';
+import { loginFacebookRequest, registerUserRequest } from '../../store/user.actions';
+import { FacebookLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 
 @Component({
   selector: 'app-register',
@@ -13,12 +14,12 @@ import { registerUserRequest } from '../../store/user.actions';
 })
 export class RegisterComponent implements AfterViewInit, OnDestroy {
   @ViewChild('f') form!: NgForm;
-
+  authStateSub!: Subscription;
   error: Observable<null | RegisterError>;
   errorSub!: Subscription;
   loading: Observable<boolean>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private auth: SocialAuthService) {
     this.error = store.select(state => state.users.registerError);
     this.loading = store.select(state => state.users.registerLoading);
   }
@@ -32,6 +33,12 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
         this.form.form.get('email')?.setErrors({});
       }
     });
+
+    this.authStateSub = this.auth.authState.subscribe((userSocial: SocialUser) => {
+      console.log('FB Login Successful!');
+      console.log(userSocial);
+      this.store.dispatch(loginFacebookRequest({userSocial}));
+    });
   }
 
   onSubmit() {
@@ -41,5 +48,9 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.errorSub.unsubscribe();
+  }
+
+  fbLogin() {
+    void this.auth.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 }
